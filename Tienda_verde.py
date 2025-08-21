@@ -1,16 +1,14 @@
 class Menu:
     def Main_Menu(self):
         print("Bienvenido a la tienda verde")
-        print("1.Ingresar empleado")
-        print("2.Ingresar proveedor")
-        print("3.Realizar compra")
-        print("4.Ingresar Cliente")
-        print("5.Mostrar inventario")
-        print("6.Realizar venta")
-        print("7.Movimientos")
-        print("8.Personas")
-        print("9.Modificar productos")
-        print("10.Salir")
+        print("1.Ingreso de datos")
+        print("2.Realizar compra")
+        print("3.Realizar venta")
+        print("4.Mostrar inventario")
+        print("5.Movimientos")
+        print("6.Personas")
+        print("7.Modificar productos")
+        print("8.Salir")
     def Pur_Menu(self):
         print("Opciones de compra")
         print("1.Nuevo producto")
@@ -29,6 +27,12 @@ class Menu:
         print("4.Salir")
     def Per_Menu(self):
         print("Personas relevantes")
+        print("1.Empleados")
+        print("2.Proveedores")
+        print("3.Clientes")
+        print("4.Salir")
+    def In_Menu(self):
+        print("Ingreso de datos al sistema")
         print("1.Empleados")
         print("2.Proveedores")
         print("3.Clientes")
