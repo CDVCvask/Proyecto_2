@@ -1,5 +1,21 @@
 class Menu:
-    pass
+    def Main_Menu(self):
+        print("Bienvenido a la tienda verde")
+        print("1.Ingresar empleado")
+        print("2.Ingresar proveedor")
+        print("3.Realizar compra")
+        print("4.Ingresar Cliente")
+        print("5.Mostrar productos")
+        print("6.Mostrar categorias")
+        print("7.Realizar venta")
+        print("8.Mostra ventas")
+        print("9.Mostrar compras")
+        print("10.Mostrar empleados")
+        print("11.Mostrar Proveedores")
+        print("12.Mostrar clientes")
+        print("13.Mostrar categorías")
+        print("14.Modificar productos")
+        print("14.Salir")
 class Clients:
     def __init__(self, Nit,Name,Phone,Adress,Mail):
         self.Nit = Nit
