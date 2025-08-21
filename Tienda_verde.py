@@ -28,3 +28,12 @@ class Products:
         self.Tpurchase = Tpurchase
         self.Tsells = Tsells
         self.Stock = Tpurchase - Tsells
+class Suppliers:
+    def __init__(self,ID_Sup,Name,Company,Phone,Adress,Mail,Category):
+        self.ID_Sup = ID_Sup
+        self.Name = Name
+        self.Company = Company
+        self.Phone = Phone
+        self.Adress = Adress
+        self.Mail = Mail
+        self.Category = Category
