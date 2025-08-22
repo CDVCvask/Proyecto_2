@@ -33,10 +33,12 @@ class Menu:
         print("4.Salir")
     def In_Menu(self):
         print("Ingreso de datos al sistema")
-        print("1.Empleados")
-        print("2.Proveedores")
-        print("3.Clientes")
-        print("4.Salir")
+        print("1.Categorías")
+        print("2.Productos")
+        print("3.Empleados")
+        print("4.Proveedores")
+        print("5.Clientes")
+        print("6.Salir")
 class Clients:
     def __init__(self, Nit,Name,Phone,Adress,Mail):
         self.Nit = Nit
@@ -105,12 +107,25 @@ class Purchase_Details:
         self.SubTotal = SubTotal
         self.Expiration = Expiration
 menus = Menu()
+contP = 0
 while 0 != 1:
     menus.Main_Menu()
     opt = input("Ingrese la opcion que desee: ")
     match opt:
         case "1":
-            pass
+            menus.In_Menu()
+            op1 = input("Ingrese el ingreso que desee: ")
+            match op1:
+                case "1":
+                    pass
+                case "2":
+                    pass
+                case "3":
+                    pass
+                case "4":
+                    pass
+                case _:
+                    print("La opción seleccionada no es valida")
         case "2":
             pass
         case "3":
