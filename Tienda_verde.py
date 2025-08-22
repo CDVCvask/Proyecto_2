@@ -104,3 +104,26 @@ class Purchase_Details:
         self.P_Price = P_Price
         self.SubTotal = SubTotal
         self.Expiration = Expiration
+menus = Menu()
+while 0 != 1:
+    menus.Main_Menu()
+    opt = input("Ingrese la opcion que desee: ")
+    match opt:
+        case "1":
+            pass
+        case "2":
+            pass
+        case "3":
+            pass
+        case "4":
+            pass
+        case "5":
+            pass
+        case "6":
+            pass
+        case "7":
+            pass
+        case "8":
+            pass
+        case _:
+            print("Opción invalida")
