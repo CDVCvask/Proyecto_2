@@ -34,11 +34,10 @@ class Menu:
     def In_Menu(self):
         print("Ingreso de datos al sistema")
         print("1.Categorías")
-        print("2.Productos")
-        print("3.Empleados")
-        print("4.Proveedores")
-        print("5.Clientes")
-        print("6.Salir")
+        print("2.Empleados")
+        print("3.Proveedores")
+        print("4.Clientes")
+        print("5.Salir")
 class Clients:
     def __init__(self, Nit,Name,Phone,Adress,Mail):
         self.Nit = Nit
@@ -107,22 +106,30 @@ class Purchase_Details:
         self.SubTotal = SubTotal
         self.Expiration = Expiration
 menus = Menu()
-contP = 0
+contC = 0
 while 0 != 1:
     menus.Main_Menu()
     opt = input("Ingrese la opcion que desee: ")
     match opt:
         case "1":
             menus.In_Menu()
-            op1 = input("Ingrese el ingreso que desee: ")
-            match op1:
+            opt1 = input("Seleccione el ingreso que desee: ")
+            match opt1:
                 case "1":
-                    pass
+                    num = input("Cuantas categorías desea ingresar: ")
+                    if num is int:
+                        cat_code = f"P{contC}"
+                        name = input("Ingrese el nombre de la categoria")
+                        cat = Category(cat_code,name)
+                    else:
+                        print("El tipo de dato ingresado es incorrecto")
                 case "2":
                     pass
                 case "3":
                     pass
                 case "4":
+                    pass
+                case "5":
                     pass
                 case _:
                     print("La opción seleccionada no es valida")
