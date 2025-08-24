@@ -128,6 +128,12 @@ class Mod_Category:
             if look == code:
                 find = code
         return find
+    def Cat_Name(self,Code):
+        category = " "
+        for code,value in self.categorys.items():
+            if code == Code:
+                category = value['Nombre']
+        return category
 class Mod_Employee:
     def __init__(self):
         self.employees = {}
@@ -142,10 +148,11 @@ class Mod_Supplier:
     def Show_Sup(self):
         count = 1
         for code, value in self.suppliers.items():
+            cat = mod_c.Cat_Name(value['Categoria'])
             print(f"Proveedor {count}")
             print(f"Código {code}, Nombre: {value['Nombre']}, Empresa: {value['Empresa']}")
             print(f"Telefno: {value['Telefno']}, Dirección: {value['Dirección']}, Correo: {value['Correo']}")
-            print(f"Categoria: {value['Categoria']}")
+            print(f"Categoria: {cat}")
             count = count + 1
             print(" ")
     def Check_Sup(self):
@@ -217,9 +224,9 @@ while 0 != 1:
                                     print("No se a encontrado ninguna categoría con ese código")
                                 else:
                                     break
-                            supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
-                            mod_prov.Add_Supplier(supplier)
-                            contProv = contProv + 1
+                        supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
+                        mod_prov.Add_Sup(supplier)
+                        contProv = contProv + 1
                     case "4":
                         pass
                     case "5":
@@ -255,7 +262,7 @@ while 0 != 1:
                     case "1":
                         pass
                     case "2":
-                        empty = mod_prov.Check_Supp()
+                        empty = mod_prov.Check_Sup()
                         if empty == False:
                             print("No hay ningún proveedor que mostrar")
                         else:
