@@ -110,7 +110,7 @@ class Mod_Category:
         self.categorys = {}
     def Add_Cat(self,cat):
         self.categorys[cat.Cat_Code] = {'Nombre': cat.Name}
-    def Check(self):
+    def Check_C(self):
         if len(self.categorys) == 0:
             return False
         else:
@@ -146,6 +146,13 @@ class Mod_Supplier:
             print(f"Código {code}, Nombre: {value['Nombre']}, Empresa: {value['Empresa']}")
             print(f"Telefno: {value['Telefno']}, Dirección: {value['Dirección']}, Correo: {value['Correo']}")
             print(f"Categoria: {value['Categoria']}")
+            count = count + 1
+            print(" ")
+    def Check_Sup(self):
+        if len(self.suppliers) == 0:
+            return False
+        else:
+            return True
 menus = Menu()
 contC = 0
 contE = 0
@@ -230,7 +237,7 @@ while 0 != 1:
                     case "1":
                         pass
                     case "2":
-                        empty = mod_c.Check()
+                        empty = mod_c.Check_C()
                         if empty == False:
                             print("No hay ninguna categoría que mostrar")
                         else:
@@ -242,7 +249,25 @@ while 0 != 1:
             case "5":
                 pass
             case "6":
-                pass
+                menus.Per_Menu()
+                opt1 = input("Seleccione el ingreso que desea ver: ")
+                match opt1:
+                    case "1":
+                        pass
+                    case "2":
+                        empty = mod_prov.Check_Supp()
+                        if empty == False:
+                            print("No hay ningún proveedor que mostrar")
+                        else:
+                            mod_prov.Show_Sup()
+                    case "3":
+                        pass
+                    case "4":
+                        pass
+                    case "5":
+                        pass
+                    case _:
+                        print("Opción ingresada no valida")
             case "7":
                 pass
             case "8":
