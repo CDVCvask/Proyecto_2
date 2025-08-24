@@ -115,6 +115,11 @@ class Mod_Category:
             return False
         else:
             return True
+    def Show_Cat(self):
+        count = 1
+        for code, value in self.categorys.items():
+            print(f"Categoria {count}")
+            print(f"Nombre: {value['Nombre']} - Código: {code}")
 menus = Menu()
 contC = 0
 mod_c = Mod_Category()
@@ -128,23 +133,20 @@ while 0 != 1:
             opt1 = input("Seleccione el ingreso que desee: ")
             match opt1:
                 case "1":
-                    num = input("Cuantas categorías desea ingresar: ")
-                    if num is int:
-                        for i in range(num):
-                            cat_code = f"P{contC}"
-                            while 0 != 1:
-                                print(f"Ingreso de la categoría {count}")
-                                name = input("Ingrese el nombre de la categoria")
-                                if name == "":
-                                    print("No puede dejar este espacio en blanco")
-                                else:
-                                    break
-                            cat = Category(cat_code, name)
-                            count = count + 1
-                            contC = contC + 1
-                            mod_c.Add_Cat(cat)
-                    else:
-                        print("El tipo de dato ingresado es incorrecto")
+                    num = int(input("Cuantas categorías desea ingresar: "))
+                    for i in range(num):
+                        cat_code = f"P{contC}"
+                        while 0 != 1:
+                            print(f"Ingreso de la categoría {count}")
+                            name = input("Ingrese el nombre de la categoria")
+                            if name == "":
+                                print("No puede dejar este espacio en blanco")
+                            else:
+                                break
+                        cat = Category(cat_code, name)
+                        count = count + 1
+                        contC = contC + 1
+                        mod_c.Add_Cat(cat)
                 case "2":
                     pass
                 case "3":
@@ -165,7 +167,16 @@ while 0 != 1:
             match opt1:
                 case "1":
                     pass
-                case
+                case "2":
+                    empty = mod_c.Check()
+                    if empty == False:
+                        print("No hay ninguna categoría que mostrar")
+                    else:
+                        mod_c.Show_Cat()
+                case "3":
+                    pass
+                case _:
+                    print("La opción selecionada no es valida")
         case "5":
             pass
         case "6":
