@@ -139,6 +139,13 @@ class Mod_Supplier:
     def Add_Sup(self,sup):
         self.suppliers[sup.ID_Sup] = {'Nombre': sup.Name,'Empresa': sup.Company,'Telefno':sup.Phone,
                                       'Dirección': sup.Adress,'Correo':sup.Mail,'Categoria':sup.Category}
+    def Show_Sup(self):
+        count = 1
+        for code, value in self.suppliers.items():
+            print(f"Proveedor {count}")
+            print(f"Código {code}, Nombre: {value['Nombre']}, Empresa: {value['Empresa']}")
+            print(f"Telefno: {value['Telefno']}, Dirección: {value['Dirección']}, Correo: {value['Correo']}")
+            print(f"Categoria: {value['Categoria']}")
 menus = Menu()
 contC = 0
 contE = 0
