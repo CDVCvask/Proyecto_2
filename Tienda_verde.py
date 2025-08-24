@@ -1,6 +1,6 @@
 class Menu:
     def Main_Menu(self):
-        print("Bienvenido a la tienda verde")
+        print("Bienvenido al supermercado Bing Bong")
         print("1.Ingreso de datos")
         print("2.Realizar compra")
         print("3.Realizar venta")
@@ -120,70 +120,75 @@ class Mod_Category:
         for code, value in self.categorys.items():
             print(f"Categoria {count}")
             print(f"Nombre: {value['Nombre']} - Código: {code}")
+            print(" ")
+            count += 1
 menus = Menu()
 contC = 0
 mod_c = Mod_Category()
 while 0 != 1:
-    menus.Main_Menu()
-    opt = input("Ingrese la opcion que desee: ")
-    match opt:
-        case "1":
-            count = 1
-            menus.In_Menu()
-            opt1 = input("Seleccione el ingreso que desee: ")
-            match opt1:
-                case "1":
-                    num = int(input("Cuantas categorías desea ingresar: "))
-                    for i in range(num):
-                        cat_code = f"P{contC}"
-                        while 0 != 1:
-                            print(f"Ingreso de la categoría {count}")
-                            name = input("Ingrese el nombre de la categoria")
-                            if name == "":
-                                print("No puede dejar este espacio en blanco")
-                            else:
-                                break
-                        cat = Category(cat_code, name)
-                        count = count + 1
-                        contC = contC + 1
-                        mod_c.Add_Cat(cat)
-                case "2":
-                    pass
-                case "3":
-                    pass
-                case "4":
-                    pass
-                case "5":
-                    pass
-                case _:
-                    print("La opción seleccionada no es valida")
-        case "2":
-            pass
-        case "3":
-            pass
-        case "4":
-            menus.Inv_Menu()
-            opt1 = input("Seleccione que parte del inventario desea ver: ")
-            match opt1:
-                case "1":
-                    pass
-                case "2":
-                    empty = mod_c.Check()
-                    if empty == False:
-                        print("No hay ninguna categoría que mostrar")
-                    else:
-                        mod_c.Show_Cat()
-                case "3":
-                    pass
-                case _:
-                    print("La opción selecionada no es valida")
-        case "5":
-            pass
-        case "6":
-            pass
-        case "7":
-            pass
-        case "8":
-            pass
-        case _:
-            print("Opción invalida")
+    try:
+        menus.Main_Menu()
+        opt = input("Ingrese la opcion que desee: ")
+        match opt:
+            case "1":
+                count = 1
+                menus.In_Menu()
+                opt1 = input("Seleccione el ingreso que desee: ")
+                match opt1:
+                    case "1":
+                        num = int(input("Cuantas categorías desea ingresar: "))
+                        for i in range(num):
+                            cat_code = f"P{contC}"
+                            while 0 != 1:
+                                print(f"Ingreso de la categoría {count}")
+                                name = input("Ingrese el nombre de la categoria: ")
+                                if name == "":
+                                    print("No puede dejar este espacio en blanco")
+                                else:
+                                    break
+                            cat = Category(cat_code, name)
+                            count = count + 1
+                            contC = contC + 1
+                            mod_c.Add_Cat(cat)
+                    case "2":
+                        pass
+                    case "3":
+                        pass
+                    case "4":
+                        pass
+                    case "5":
+                        pass
+                    case _:
+                        print("La opción seleccionada no es valida")
+            case "2":
+                pass
+            case "3":
+                pass
+            case "4":
+                menus.Inv_Menu()
+                opt1 = input("Seleccione que parte del inventario desea ver: ")
+                match opt1:
+                    case "1":
+                        pass
+                    case "2":
+                        empty = mod_c.Check()
+                        if empty == False:
+                            print("No hay ninguna categoría que mostrar")
+                        else:
+                            mod_c.Show_Cat()
+                    case "3":
+                        pass
+                    case _:
+                        print("La opción selecionada no es valida")
+            case "5":
+                pass
+            case "6":
+                pass
+            case "7":
+                pass
+            case "8":
+                pass
+            case _:
+                print("Opción invalida")
+    except ValueError:
+        print("El tipo de dato ingresado no es valido")
