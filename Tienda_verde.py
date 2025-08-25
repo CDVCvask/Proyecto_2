@@ -183,15 +183,54 @@ class Mod_Supplier:
             if sup == code:
                 supplier = code
         return supplier
+class Mod_Product:
+    def __init__(self):
+        self.products = {}
+    def Add_Product(self,product):
+        self.products[product.IDpro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
+                                        'Stock':product.Stock}
+class See_Purchase:
+    def __init__(self):
+        self.purchases = {}
+    def Add_Pur(self,pur):
+        self.purchases[pur.ID_Pur] = {'Fecha':pur.Date,'Proveedor':pur.Supplier,'Empleado':pur.Employee,'Total':pur.Total}
+    def Show_Pur(self):
+        count = 1
+        for key,value in self.purchases.items():
+            print(f"Compra {count}")
+            print(f"Proveedor: {value['Proveedor']}, Empleado a cargo: {value['Empleado']}, Fecha: {value['Fecha']}")
+            see_pd.Show_Pur(key)
+            print(f"Total = {value['Total']}")
+            count = count + 1
+            print(" ")
+class See_Purchase_Details:
+    def __init__(self):
+        self.purchase_Details = {}
+    def Add_Pur_De(self,pur):
+        self.purchase_Details[pur.ID_PD] = {'Codigo compra':pur.Purchase,'Cantidad': pur.Quantity, 'Producto':pur.Product,
+                                            'Precio': pur.P_Price,'SubTotal': pur.SubTotal, 'Caducidad': pur.Expiration}
+    def Show_Pur_De(self,code):
+        count = 1
+        for key,value in self.purchase_Details.items():
+            if code == key:
+                print(f"Producto: {count}")
+                print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']}"
+                      f" = SubTotal: {value['SubTotal']}")
+                print(" ")
+                count = count + 1
 menus = Menu()
 contC = 0
 contE = 0
 contProv = 0
 contPur = 0
 contProd = 0
+contPur_de = 0
 mod_c = Mod_Category()
 mod_prov = Mod_Supplier()
 mod_emp = Mod_Employee()
+mod_prod = Mod_Product()
+see_p = See_Purchase()
+see_pd = See_Purchase_Details()
 while 0 != 1:
     try:
         menus.Main_Menu()
@@ -306,8 +345,12 @@ while 0 != 1:
                                     if num <= 0:
                                         print("La cantidad ingresada no es valida")
                                     else:
+                                        code_pur = f"Com{contPur}"
+                                        total = 0
+                                        time = datetime.datetime.now()
                                         for i in range(num):
                                             code_prod = f"Prod{contProd}"
+                                            code_pur_de = f"PurDe{contPurDe}"
                                             name = input("Ingrese el nombre del producto: ")
                                             if name == "":
                                                 print("No puede dejar este espacio vacío")
@@ -331,12 +374,21 @@ while 0 != 1:
                                                                 print("El precio ingresado no es valido")
                                                             else:
                                                                 sub_total = p_price * quantity
+                                                                total = total + sub_total
                                                                 expiration = input("Ingrese la fecha de caducidad"
                                                                                    " del producto(Si no tiene deje el espacio"
                                                                                    "en blanco: ")
                                                                 if expiration == "":
                                                                     expiration = "N/A"
-
+                                                                    product = Products(code_prod, name, category,
+                                                                                       s_price,quantity,0)
+                                                                    mod_prod.Add_Product(product)
+                                                                    contProd += 1
+                                                                    pur_de = Purchase_Details(contPur_de,code_pur,quantity,
+                                                                                              p_price,sub_total,expiration)
+                                                                    contPur_de += 1
+                                        contPur = contPur + 1
+                                        purchase = Purchase(code_pur,time,supplier,employee,total)
                         else:
                             print("Realizando compra")
                             print("1.Compra de nuevo producto")
