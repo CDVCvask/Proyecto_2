@@ -223,7 +223,7 @@ while 0 != 1:
                                     print("El salario ingresado no es valido")
                                 else:
                                     break
-                        emp = Employee(emp_code, name, phone, adress, mail,salary)
+                        emp = Employees(emp_code, name, phone, adress, mail,salary)
                         count = count + 1
                         contE = contE + 1
                         mod_emp.Add_Emp(emp)
