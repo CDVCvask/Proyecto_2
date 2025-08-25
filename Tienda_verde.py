@@ -151,6 +151,11 @@ class Mod_Employee:
             return False
         else:
             return True
+    def Find_Emp(self,emp):
+        employee = -1
+        for code, value in self.employees.items():
+            if emp == code:
+                employee = code
 class Mod_Supplier:
     def __init__(self):
         self.suppliers = {}
@@ -172,10 +177,12 @@ class Mod_Supplier:
             return False
         else:
             return True
+    def Find_Sup(self,sup):
 menus = Menu()
 contC = 0
 contE = 0
 contProv = 0
+contPur = 0
 mod_c = Mod_Category()
 mod_prov = Mod_Supplier()
 mod_emp = Mod_Employee()
@@ -258,7 +265,28 @@ while 0 != 1:
                     case _:
                         print("La opción seleccionada no es valida")
             case "2":
-                pass
+                first = True
+                empty = mod_emp.Check_Emp()
+                empty1 = mod_prov.Check_Prov()
+                if empty == False:
+                    print("No se pueden realizar compras porque no hay empleados registrados")
+                else:
+                    if empty1 == False:
+                        print("No se pueden realizar compras porque no hay proveedores registrados")
+                    else:
+                        if First == True:
+                            employee = input("Ingrese el código del empleado a cargo de la compra: ")
+                            look = mod_emp.Find_Emp(employe)
+                            if look == -1:
+                                print("No hay ningún empleado con ese código")
+                            else:
+                                supplier = input("Ingrese el código del proveedor a cargo de la venta")
+
+                        else:
+                            print("Realizando compra")
+                            print("1.Compra de nuevo producto")
+                            print("2.Restock de producto")
+                            print("3.Salir")
             case "3":
                 pass
             case "4":
