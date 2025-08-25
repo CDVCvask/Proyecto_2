@@ -191,6 +191,18 @@ class Mod_Product:
     def Add_Product(self,product):
         self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
                                         'Stock':product.Stock}
+    def Show_Product(self):
+        count = 1
+        for key,value in self.products.items():
+            print(f"Producto {count}")
+            print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {value['Categoría']},"
+                  f" Precio: {value['Precio']}, Stock: {value['Stock']}")
+            count = count + 1
+    def Check_Product(self):
+        if len(self.products) == 0:
+            return False
+        else:
+            return True
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
@@ -219,7 +231,7 @@ class See_Purchase_Details:
     def Show_Pur_De(self,code):
         count = 1
         for key,value in self.purchase_Details.items():
-            if code == key:
+            if code == value['Codigo compra']:
                 print(f"Producto: {count}")
                 print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']}"
                       f" = SubTotal: {value['SubTotal']}")
@@ -408,7 +420,11 @@ while 0 != 1:
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
                 match opt1:
                     case "1":
-                        pass
+                        empty = mod_prod.Check_Product()
+                        if empty == False:
+                            print("No hay ningún producto que mostrar")
+                        else:
+                            mod_prod.Show_Product()
                     case "2":
                         empty = mod_c.Check_C()
                         if empty == False:
