@@ -138,7 +138,7 @@ class Mod_Employee:
     def __init__(self):
         self.employees = {}
     def Add_Emp(self,emp):
-        self.employees[emp.ID_Pro] = {'Nombre': emp.Name,'Telefono':emp.Phone,'Dirección':emp.Adress,'Correo':emp.Mail,
+        self.employees[emp.Ecode] = {'Nombre': emp.Name,'Telefono':emp.Phone,'Dirección':emp.Adress,'Correo':emp.Mail,
                                       'Salario':emp.Salary}
     def Show_Emp(self):
         count = 1
@@ -266,11 +266,7 @@ while 0 != 1:
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
                 match opt1:
                     case "1":
-                        empty = mod_emp.Check_Emp()
-                        if empty == False:
-                            print("No hay ningún empleado que mostrar")
-                        else:
-                            mod_emp.Show_Emp()
+                        pass
                     case "2":
                         empty = mod_c.Check_C()
                         if empty == False:
@@ -288,7 +284,11 @@ while 0 != 1:
                 opt1 = input("Seleccione el ingreso que desea ver: ")
                 match opt1:
                     case "1":
-                        pass
+                        empty = mod_emp.Check_Emp()
+                        if empty == False:
+                            print("No hay ningún empleado que mostrar")
+                        else:
+                            mod_emp.Show_Emp()
                     case "2":
                         empty = mod_prov.Check_Sup()
                         if empty == False:
