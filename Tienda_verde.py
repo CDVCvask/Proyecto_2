@@ -138,7 +138,8 @@ class Mod_Employee:
     def __init__(self):
         self.employees = {}
     def Add_Emp(self,emp):
-        pass
+        self.employees[emp.ID_Pro] = {'Nombre': emp.Name,'Telefono':emp.Phone,'Dirección':emp.Adress,'Correo':emp.Mail,
+                                      'Salario':emp.Salary}
 class Mod_Supplier:
     def __init__(self):
         self.suppliers = {}
@@ -166,6 +167,7 @@ contE = 0
 contProv = 0
 mod_c = Mod_Category()
 mod_prov = Mod_Supplier()
+mod_emp = Mod_Employee()
 while 0 != 1:
     try:
         menus.Main_Menu()
@@ -202,7 +204,18 @@ while 0 != 1:
                             if name == "":
                                 print("No puede dejar el espacio en blanco")
                             else:
-                                pass
+                                phone = input("Ingrese su telefono: ")
+                                adress = input("Ingrese su dirección: ")
+                                mail = input("Ingrese su correo: ")
+                                salary = int(input("Ingrese su salario: "))
+                                if salary <= 0:
+                                    print("El salario ingresado no es valido")
+                                else:
+                                    break
+                        emp = Employee(emp_code, name, phone, adress, mail,salary)
+                        count = count + 1
+                        contE = contE + 1
+                        mod_emp.Add_Emp(emp)
                     case "3":
                         count = 0
                         num = int(input("Cuantos prooverdores desea ingresar: "))
