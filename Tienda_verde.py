@@ -254,6 +254,12 @@ class Mod_Clients:
             print(f"Cliente {count}")
             print(f"NIT: {key}, Nombre: {value['Nombre']}, Telefono: {value['Telefono']}, Correo: {value['Correo']},"
                   f" Dirección: {value['Dirección']}")
+    def Find_Client(self,find):
+        client = -1
+        for key,value in self.clients.items():
+            if find == key:
+                client = key
+        return client
 menus = Menu()
 contC = 0
 contE = 0
@@ -262,12 +268,15 @@ contPur = 0
 contProd = 0
 contPur_de = 0
 contCli = 0
+contSell = 0
+contSell_de = 0
 mod_c = Mod_Category()
 mod_prov = Mod_Supplier()
 mod_emp = Mod_Employee()
 mod_prod = Mod_Product()
 see_p = See_Purchase()
 see_pd = See_Purchase_Details()
+mod_clie = Mod_Client()
 while 0 != 1:
     try:
         menus.Main_Menu()
@@ -370,6 +379,7 @@ while 0 != 1:
                                         mail = input("Ingrese el correo del cliente:")
                                         break
                                 client = Clients(nit,name,phone,adress,mail)
+                                mod_clie.Add_Client(client)
                     case "5":
                         pass
                     case _:
@@ -452,6 +462,27 @@ while 0 != 1:
                 empty = mod_emp.Check_Emp()
                 if empty == False:
                     print("No se pueden realizar ventas si no hay empleados")
+                else:
+                    empty1 = mod_clie.Check_Client()
+                    if empty1 == False:
+                        print("No se pueden realizar ventas si no hay clientes")
+                    else:
+                        empty2 = mod_prod.Check_Product()
+                        if empty2 == False:
+                            print("No se pueden realizar ventas si no hay productos")
+                        else:
+                            code_sell = f"S{contSell}"
+                            employee = input("Ingrese el código del empleado a cargo de la venta: ")
+                            look = mod_emp.Find_Emp(employee)
+                            if look == -1:
+                                print("No hay ningún empleado con ese código")
+                            else:
+                                client = input("Ingrese el Nit del cliente que hace la compra: ")
+                                look = mod_clie.Find_Client(client)
+                                if look == -1:
+                                    print("No hay ningún cliente que coincida")
+                                else:
+                                    pass
             case "4":
                 menus.Inv_Menu()
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
@@ -507,10 +538,12 @@ while 0 != 1:
                         else:
                             mod_prov.Show_Sup()
                     case "3":
-                        pass
+                        empty = mod_clie.Check_Client()
+                        if empty == False:
+                            print("No hay ningún cliente que mostrar")
+                        else:
+                            modclie.Show_Client()
                     case "4":
-                        pass
-                    case "5":
                         pass
                     case _:
                         print("Opción ingresada no valida")
