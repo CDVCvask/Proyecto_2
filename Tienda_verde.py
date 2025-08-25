@@ -156,6 +156,7 @@ class Mod_Employee:
         for code, value in self.employees.items():
             if emp == code:
                 employee = code
+        return employee
 class Mod_Supplier:
     def __init__(self):
         self.suppliers = {}
@@ -187,7 +188,7 @@ class Mod_Product:
     def __init__(self):
         self.products = {}
     def Add_Product(self,product):
-        self.products[product.IDpro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
+        self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
                                         'Stock':product.Stock}
 class See_Purchase:
     def __init__(self):
@@ -199,7 +200,7 @@ class See_Purchase:
         for key,value in self.purchases.items():
             print(f"Compra {count}")
             print(f"Proveedor: {value['Proveedor']}, Empleado a cargo: {value['Empleado']}, Fecha: {value['Fecha']}")
-            see_pd.Show_Pur(key)
+            see_pd.Show_Pur_De(key)
             print(f"Total = {value['Total']}")
             count = count + 1
             print(" ")
@@ -306,7 +307,7 @@ while 0 != 1:
                                 else:
                                     Company = input("Ingrese el nombre de su empresa(Si no tiene deje en blanco el espacio: ")
                                     if Company == "":
-                                        Company == "N/A"
+                                        Company = "N/A"
                                     phone = input("Ingrese el telefono del prooverdor: ")
                                     adress = input("Ingrese la dirección del proveedor: ")
                                     mail = input("Ingrese el correo del proveedor:")
@@ -328,16 +329,16 @@ while 0 != 1:
             case "2":
                 first = True
                 empty = mod_emp.Check_Emp()
-                empty1 = mod_prov.Check_Prov()
+                empty1 = mod_prov.Check_Sup()
                 if empty == False:
                     print("No se pueden realizar compras porque no hay empleados registrados")
                 else:
                     if empty1 == False:
                         print("No se pueden realizar compras porque no hay proveedores registrados")
                     else:
-                        if First == True:
+                        if first == True:
                             employee = input("Ingrese el código del empleado a cargo de la compra: ")
-                            look = mod_emp.Find_Emp(employe)
+                            look = mod_emp.Find_Emp(employee)
                             if look == -1:
                                 print("No hay ningún empleado con ese código")
                             else:
@@ -390,7 +391,8 @@ while 0 != 1:
                                                                     mod_prod.Add_Product(product)
                                                                     contProd += 1
                                                                     pur_de = Purchase_Details(contPur_de,code_pur,quantity,
-                                                                                              p_price,sub_total,expiration)
+                                                                                              code_prod,p_price,sub_total,
+                                                                                              expiration)
                                                                     contPur_de += 1
                                         contPur = contPur + 1
                                         purchase = Purchase(code_pur,time,supplier,employee,total)
@@ -459,7 +461,8 @@ while 0 != 1:
             case "7":
                 pass
             case "8":
-                pass
+                print("Gracias por utilizar el programa")
+                break
             case _:
                 print("Opción invalida")
     except ValueError:
