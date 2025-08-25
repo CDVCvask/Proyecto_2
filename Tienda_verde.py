@@ -140,6 +140,17 @@ class Mod_Employee:
     def Add_Emp(self,emp):
         self.employees[emp.ID_Pro] = {'Nombre': emp.Name,'Telefono':emp.Phone,'Dirección':emp.Adress,'Correo':emp.Mail,
                                       'Salario':emp.Salary}
+    def Show_Emp(self):
+        count = 1
+        for key,value in self.employees.items():
+            print(f"Empleado {count}")
+            print(f"Código: {key}, Nombre: {value['Nombre']}, Telefono: {value['Telefono']},"
+                  f" Dirección: {value['Dirección']}, Correo: {value['Correo']}, Salario: {value['Salario']}")
+    def Check_Emp(self):
+        if len(self.employees) == 0:
+            return False
+        else:
+            return True
 class Mod_Supplier:
     def __init__(self):
         self.suppliers = {}
@@ -255,7 +266,11 @@ while 0 != 1:
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
                 match opt1:
                     case "1":
-                        pass
+                        empty = mod_emp.Check_Emp()
+                        if empty == False:
+                            print("No hay ningún empleado que mostrar")
+                        else:
+                            mod_emp.Show_Emp()
                     case "2":
                         empty = mod_c.Check_C()
                         if empty == False:
