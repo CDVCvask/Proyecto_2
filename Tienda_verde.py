@@ -357,7 +357,7 @@ while 0 != 1:
                                         time = datetime.now()
                                         for i in range(num):
                                             code_prod = f"Prod{contProd}"
-                                            code_pur_de = f"PurDe{contPurDe}"
+                                            code_pur_de = f"PurDe{contPur_de}"
                                             name = input("Ingrese el nombre del producto: ")
                                             if name == "":
                                                 print("No puede dejar este espacio vacío")
@@ -394,9 +394,11 @@ while 0 != 1:
                                                                     pur_de = Purchase_Details(contPur_de,code_pur,quantity,
                                                                                               code_prod,p_price,sub_total,
                                                                                               expiration)
+                                                                    see_pd.Add_Purchase_Details(pur_de)
                                                                     contPur_de += 1
                                         contPur = contPur + 1
                                         purchase = Purchase(code_pur,time,supplier,employee,total)
+                                        see_p.Add_Pur(purchase)
                         else:
                             menus.Pur_Menu()
             case "3":
