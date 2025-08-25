@@ -210,9 +210,17 @@ class Mod_Product:
                 product = code
         return product
     def Get_Price(self,code):
-        pass
+        price = 0
+        for key,value in self.products.items():
+            if code == key:
+                price = value['Precio']
+        return price
     def Check_Stock(self,code):
-        pass
+        stock = 0
+        for key,value in self.products.items():
+            if code == key:
+                stock = value['Stock']
+        return stock
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
@@ -286,7 +294,8 @@ mod_emp = Mod_Employee()
 mod_prod = Mod_Product()
 see_p = See_Purchase()
 see_pd = See_Purchase_Details()
-mod_clie = Mod_Client()
+mod_clie = Mod_Clients()
+first = True
 while 0 != 1:
     try:
         menus.Main_Menu()
@@ -395,7 +404,6 @@ while 0 != 1:
                     case _:
                         print("La opción seleccionada no es valida")
             case "2":
-                first = True
                 empty = mod_emp.Check_Emp()
                 empty1 = mod_prov.Check_Sup()
                 if empty == False:
@@ -466,8 +474,19 @@ while 0 != 1:
                                         contPur = contPur + 1
                                         purchase = Purchase(code_pur,time,supplier,employee,total)
                                         see_p.Add_Pur(purchase)
+                                        first = False
                         else:
                             menus.Pur_Menu()
+                            opt1 = input("Ingrese la opción que desee: ")
+                            match opt1:
+                                case "1":
+                                    pass
+                                case "2":
+                                    pass
+                                case "3":
+                                    pass
+                                case _:
+                                    print("La opción seleccionada no es valida")
             case "3":
                 empty = mod_emp.Check_Emp()
                 if empty == False:
@@ -499,13 +518,15 @@ while 0 != 1:
                                         time = datetime.now()
                                         total = 0
                                         for i in range(num):
-                                            code_sell_de = f"SD{contSellDe}"
+                                            code_sell_de = f"SD{contSell_de}"
                                             product = input("Ingrese el código del producto que se vende: ")
                                             look = mod_prod.Find_Product(product)
                                             if look == -1:
                                                 print("No hay ningún producto que coincida")
                                             else:
-                                                pass
+                                                price = mod_prod.Get_Price(product)
+                                                stock = mod_prod.Check_Stock()
+
             case "4":
                 menus.Inv_Menu()
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
@@ -565,7 +586,7 @@ while 0 != 1:
                         if empty == False:
                             print("No hay ningún cliente que mostrar")
                         else:
-                            modclie.Show_Client()
+                            mod_clie.Show_Client()
                     case "4":
                         pass
                     case _:
