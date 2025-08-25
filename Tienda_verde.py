@@ -1,3 +1,4 @@
+from datetime import datetime
 class Menu:
     def Main_Menu(self):
         print("Bienvenido al supermercado Bing Bong")
@@ -353,7 +354,7 @@ while 0 != 1:
                                     else:
                                         code_pur = f"Com{contPur}"
                                         total = 0
-                                        time = datetime.datetime.now()
+                                        time = datetime.now()
                                         for i in range(num):
                                             code_prod = f"Prod{contProd}"
                                             code_pur_de = f"PurDe{contPurDe}"
