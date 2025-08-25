@@ -203,6 +203,16 @@ class Mod_Product:
             return False
         else:
             return True
+    def Find_Product(self,prod):
+        product = -1
+        for code, value in self.products.items():
+            if prod == code:
+                product = code
+        return product
+    def Get_Price(self,code):
+        pass
+    def Check_Stock(self,code):
+        pass
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
@@ -471,7 +481,6 @@ while 0 != 1:
                         if empty2 == False:
                             print("No se pueden realizar ventas si no hay productos")
                         else:
-                            code_sell = f"S{contSell}"
                             employee = input("Ingrese el código del empleado a cargo de la venta: ")
                             look = mod_emp.Find_Emp(employee)
                             if look == -1:
@@ -482,7 +491,21 @@ while 0 != 1:
                                 if look == -1:
                                     print("No hay ningún cliente que coincida")
                                 else:
-                                    pass
+                                    num = int(input("Cantidad de productos que sea van a vender(tipo de producto no total): "))
+                                    if num <= 0:
+                                        print("La cantidad ingresada no es valida")
+                                    else:
+                                        code_sell = f"S{contSell}"
+                                        time = datetime.now()
+                                        total = 0
+                                        for i in range(num):
+                                            code_sell_de = f"SD{contSellDe}"
+                                            product = input("Ingrese el código del producto que se vende: ")
+                                            look = mod_prod.Find_Product(product)
+                                            if look == -1:
+                                                print("No hay ningún producto que coincida")
+                                            else:
+                                                pass
             case "4":
                 menus.Inv_Menu()
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
