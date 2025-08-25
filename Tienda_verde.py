@@ -203,6 +203,11 @@ class See_Purchase:
             print(f"Total = {value['Total']}")
             count = count + 1
             print(" ")
+    def Check_Pur(self):
+        if len(self.purchases) == 0:
+            return False
+        else:
+            return True
 class See_Purchase_Details:
     def __init__(self):
         self.purchase_Details = {}
@@ -390,10 +395,7 @@ while 0 != 1:
                                         contPur = contPur + 1
                                         purchase = Purchase(code_pur,time,supplier,employee,total)
                         else:
-                            print("Realizando compra")
-                            print("1.Compra de nuevo producto")
-                            print("2.Restock de producto")
-                            print("3.Salir")
+                            menus.Pur_Menu()
             case "3":
                 pass
             case "4":
@@ -413,7 +415,23 @@ while 0 != 1:
                     case _:
                         print("La opción selecionada no es valida")
             case "5":
-                pass
+                menus.Move_Menu()
+                opt1 = input("Seleccione que parte del inventario desea ver: ")
+                match opt1:
+                    case "1":
+                        empty = see_p.Check_Pur()
+                        if empty == False:
+                            print("No hay ninguna compra que mostrar")
+                        else:
+                            see_p.Show_Pur()
+                    case "2":
+                        pass
+                    case "3":
+                        pass
+                    case "4":
+                        pass
+                    case _:
+                        print("La opción seleccionada no es valida")
             case "6":
                 menus.Per_Menu()
                 opt1 = input("Seleccione el ingreso que desea ver: ")
