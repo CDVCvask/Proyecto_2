@@ -84,12 +84,13 @@ class Sells:
         self.Employee = Employee
         self.Total = Total
 class Sells_Details:
-    def __init__(self,ID_SD,Quantity,Product,Price,SubTotal):
+    def __init__(self,ID_SD,Quantity,Product,Price,SubTotal,Sell):
         self.ID_SD = ID_SD
         self.Quantity = Quantity
         self.Product = Product
         self.Price = Price
         self.SubTotal = SubTotal
+        self.Sell = Sell
 class Purchase:
     def __init__(self,ID_Pur,Date,Supplier,Employee,Total):
         self.ID_Pur = ID_Pur
@@ -278,6 +279,22 @@ class Mod_Clients:
             if find == key:
                 client = key
         return client
+class See_Sell:
+    def __init__(self):
+        self.sellers = {}
+    def Add_Seller(self,seller):
+        self.sellers[seller.ID_Sell] = {'Fecha':seller.Date,'Cliente':seller.Client,'Empleado':seller.Employee,'Total':seller.Total}
+    def Show_Seller(self):
+        count = 1
+        for key,value in self.sellers.items():
+            print(f"Cliente: {count}")
+            print(f"Cliente: {value['Cliente']}, Empleado: {value['Empleado']}, Fecha: {value['Fecha']}")
+class See_Sell_De:
+    def __init__(self):
+        self.sellers_details = {}
+    def Add_Seller_Details(self,seller):
+        self.sellers_details[seller.ID_SD] = {'Cantidad':seller.Quantity,'Producto':seller.Product,'Precio': seller.Price,'Venta': seller.Sell,
+                                              'Subtotal': seller.SubTotal}
 menus = Menu()
 contC = 0
 contE = 0
@@ -295,6 +312,8 @@ mod_prod = Mod_Product()
 see_p = See_Purchase()
 see_pd = See_Purchase_Details()
 mod_clie = Mod_Clients()
+see_sell = See_Sell()
+see_sell_de = See_Sell_De()
 first = True
 while 0 != 1:
     try:
@@ -526,7 +545,16 @@ while 0 != 1:
                                             else:
                                                 price = mod_prod.Get_Price(product)
                                                 stock = mod_prod.Check_Stock()
-
+                                                quantity = int(input("Ingrese la cantidad que va a vender del producto: "))
+                                                if quantity <= 0 or quantity > stock:
+                                                    print("La cantidad ingresada no es valida")
+                                                else:
+                                                    sub_total = price * quantity
+                                                    total = total + sub_total
+                                                    sell_de = Sells_Details(code_sell_de,quantity,product,price,sub_total)
+                                                    see_sell_de.Add_Seller_Details(sell_de)
+                                        sell = Sells(code_sell,time,client,employee,total)
+                                        see_sell.Add_Seller(sell)
             case "4":
                 menus.Inv_Menu()
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
