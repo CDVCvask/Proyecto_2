@@ -343,7 +343,7 @@ while 0 != 1:
                                 print("No hay ningún empleado con ese código")
                             else:
                                 supplier = input("Ingrese el código del proveedor a cargo de la venta")
-                                look = mod_prov.Find_Prov(supplier)
+                                look = mod_prov.Find_Sup(supplier)
                                 if look == -1:
                                     print("No existe ningún proveedor con ese código")
                                 else:
