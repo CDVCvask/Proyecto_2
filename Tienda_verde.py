@@ -237,6 +237,23 @@ class See_Purchase_Details:
                       f" = SubTotal: {value['SubTotal']}")
                 print(" ")
                 count = count + 1
+class Mod_Clients:
+    def __init__(self):
+        self.clients = {}
+    def Add_Client(self,client):
+        self.clients[client.Nit] = {'Nombre': client.Name,'Telefono': client.Phone, 'Dirección': client.Address,
+                                    'Correo': client.Mail}
+    def Check_Client(self):
+        if len(self.clients) == 0:
+            return False
+        else:
+            return True
+    def Show_Client(self):
+        count = 1
+        for key,value in self.clients.items():
+            print(f"Cliente {count}")
+            print(f"NIT: {key}, Nombre: {value['Nombre']}, Telefono: {value['Telefono']}, Correo: {value['Correo']},"
+                  f" Dirección: {value['Dirección']}")
 menus = Menu()
 contC = 0
 contE = 0
@@ -244,6 +261,7 @@ contProv = 0
 contPur = 0
 contProd = 0
 contPur_de = 0
+contCli = 0
 mod_c = Mod_Category()
 mod_prov = Mod_Supplier()
 mod_emp = Mod_Employee()
@@ -334,7 +352,24 @@ while 0 != 1:
                             mod_prov.Add_Sup(supplier)
                             contProv = contProv + 1
                     case "4":
-                        pass
+                        count = 1
+                        num = int(input("Cuantos clientes desea ingresar: "))
+                        if num <= 0:
+                            print("La cantidad ingresada no es valida")
+                        else:
+                            for i in range(num):
+                                nit = f"C{contCli}"
+                                while 0 != 1:
+                                    print(f"Cliente {count}")
+                                    name = input("Ingrese el nombre del cliente: ")
+                                    if name == "":
+                                        print("No puede dejar el espacio en blanco")
+                                    else:
+                                        phone = input("Ingrese el telefono del cliente: ")
+                                        adress = input("Ingrese la dirección del cliente: ")
+                                        mail = input("Ingrese el correo del cliente:")
+                                        break
+                                client = Clients(nit,name,phone,adress,mail)
                     case "5":
                         pass
                     case _:
@@ -414,7 +449,9 @@ while 0 != 1:
                         else:
                             menus.Pur_Menu()
             case "3":
-                pass
+                empty = mod_emp.Check_Emp()
+                if empty == False:
+                    print("No se pueden realizar ventas si no hay empleados")
             case "4":
                 menus.Inv_Menu()
                 opt1 = input("Seleccione que parte del inventario desea ver: ")
