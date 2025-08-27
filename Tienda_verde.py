@@ -294,6 +294,11 @@ class See_Sell:
             print(f"Total = {value['Total']}")
             count = count + 1
             print(" ")
+    def Check_Sell(self):
+        if len(self.sellers) == 0:
+            return False
+        else:
+            return True
 class See_Sell_De:
     def __init__(self):
         self.sellers_details = {}
@@ -590,7 +595,7 @@ while 0 != 1:
                         print("La opción selecionada no es valida")
             case "5":
                 menus.Move_Menu()
-                opt1 = input("Seleccione que parte del inventario desea ver: ")
+                opt1 = input("Seleccione cual movimiento desea ver: ")
                 match opt1:
                     case "1":
                         empty = see_p.Check_Pur()
@@ -599,7 +604,11 @@ while 0 != 1:
                         else:
                             see_p.Show_Pur()
                     case "2":
-                        pass
+                        empty = see_sell.Check_Sell()
+                        if empty == False:
+                            print("No hay ninguna venta que mostrar")
+                        else:
+                            see_sell.Show_Seller()
                     case "3":
                         pass
                     case "4":
