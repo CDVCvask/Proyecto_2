@@ -260,7 +260,7 @@ class Mod_Clients:
     def __init__(self):
         self.clients = {}
     def Add_Client(self,client):
-        self.clients[client.Nit] = {'Nombre': client.Name,'Telefono': client.Phone, 'Dirección': client.Address,
+        self.clients[client.Nit] = {'Nombre': client.Name,'Telefono': client.Phone, 'Dirección': client.Adress,
                                     'Correo': client.Mail}
     def Check_Client(self):
         if len(self.clients) == 0:
@@ -423,7 +423,7 @@ while 0 != 1:
                             print("La cantidad ingresada no es valida")
                         else:
                             for i in range(num):
-                                nit = f"C{contCli}"
+                                nit = f"CL{contCli}"
                                 while 0 != 1:
                                     print(f"Cliente {count}")
                                     name = input("Ingrese el nombre del cliente: ")
@@ -562,7 +562,7 @@ while 0 != 1:
                                                 print("No hay ningún producto que coincida")
                                             else:
                                                 price = mod_prod.Get_Price(product)
-                                                stock = mod_prod.Check_Stock()
+                                                stock = mod_prod.Check_Stock(product)
                                                 quantity = int(input("Ingrese la cantidad que va a vender del producto: "))
                                                 if quantity <= 0 or quantity > stock:
                                                     print("La cantidad ingresada no es valida")
