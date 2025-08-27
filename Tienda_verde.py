@@ -222,6 +222,10 @@ class Mod_Product:
             if code == key:
                 stock = value['Stock']
         return stock
+    def Selling(self,code,quantity):
+        for key,value in self.products.items():
+            if code == key:
+                value['Stock'] = value['Stock'] - quantity
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
@@ -288,7 +292,7 @@ class See_Sell:
     def Show_Seller(self):
         count = 1
         for key,value in self.sellers.items():
-            print(f"Cliente: {count}")
+            print(f"Venta: {count}")
             print(f"Cliente: {value['Cliente']}, Empleado: {value['Empleado']}, Fecha: {value['Fecha']}")
             see_sell_de.Show_Sell_De(key)
             print(f"Total = {value['Total']}")
@@ -310,8 +314,7 @@ class See_Sell_De:
         for key,value in self.sellers_details.items():
             if code == value['Venta']:
                 print(f"Producto: {count}")
-                print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']}"
-                      f" = SubTotal: {value['SubTotal']}")
+                print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']} = SubTotal: {value['SubTotal']}")
                 count = count + 1
 menus = Menu()
 contC = 0
@@ -571,6 +574,7 @@ while 0 != 1:
                                                     total = total + sub_total
                                                     sell_de = Sells_Details(code_sell_de,quantity,product,price,sub_total,code_sell)
                                                     see_sell_de.Add_Seller_Details(sell_de)
+                                                    mod_prod.Selling(product,quantity)
                                         sell = Sells(code_sell,time,client,employee,total)
                                         see_sell.Add_Seller(sell)
             case "4":
