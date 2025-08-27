@@ -110,6 +110,17 @@ class Purchase_Details:
 class Mod_Category:
     def __init__(self):
         self.categorys = {}
+        self.Load_Cat()
+    def Load_Cat(self):
+        try:
+            with open("Categorias.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        Cat_Code,Name = line.split(":")
+                        self.categorys[Cat_Code] = {'Nombre':Name}
+        except FileNotFoundError:
+            print("No existe el archivo de categorias.txt")
     def Add_Cat(self,cat):
         self.categorys[cat.Cat_Code] = {'Nombre': cat.Name}
     def Check_C(self):
