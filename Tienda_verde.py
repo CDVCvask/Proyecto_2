@@ -273,6 +273,7 @@ class Mod_Clients:
             print(f"Cliente {count}")
             print(f"NIT: {key}, Nombre: {value['Nombre']}, Telefono: {value['Telefono']}, Correo: {value['Correo']},"
                   f" Dirección: {value['Dirección']}")
+            count = count + 1
     def Find_Client(self,find):
         client = -1
         for key,value in self.clients.items():
@@ -289,12 +290,24 @@ class See_Sell:
         for key,value in self.sellers.items():
             print(f"Cliente: {count}")
             print(f"Cliente: {value['Cliente']}, Empleado: {value['Empleado']}, Fecha: {value['Fecha']}")
+            see_sell_de.Show_Sell_De(key)
+            print(f"Total = {value['Total']}")
+            count = count + 1
+            print(" ")
 class See_Sell_De:
     def __init__(self):
         self.sellers_details = {}
     def Add_Seller_Details(self,seller):
         self.sellers_details[seller.ID_SD] = {'Cantidad':seller.Quantity,'Producto':seller.Product,'Precio': seller.Price,'Venta': seller.Sell,
                                               'Subtotal': seller.SubTotal}
+    def Show_Sell_De(self,code):
+        count = 1
+        for key,value in self.sellers_details.items():
+            if code == value['Venta']:
+                print(f"Producto: {count}")
+                print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']}"
+                      f" = SubTotal: {value['SubTotal']}")
+                count = count + 1
 menus = Menu()
 contC = 0
 contE = 0
