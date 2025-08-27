@@ -499,15 +499,15 @@ while 0 != 1:
                                                                                    "en blanco: ")
                                                                 if expiration == "":
                                                                     expiration = "N/A"
-                                                                    product = Products(code_prod, name, category,
-                                                                                       s_price,quantity,0)
-                                                                    mod_prod.Add_Product(product)
-                                                                    contProd += 1
-                                                                    pur_de = Purchase_Details(contPur_de,code_pur,quantity,
-                                                                                              code_prod,p_price,sub_total,
-                                                                                              expiration)
-                                                                    see_pd.Add_Pur_De(pur_de)
-                                                                    contPur_de += 1
+                                                                product = Products(code_prod, name, category,
+                                                                                   s_price,quantity,0)
+                                                                mod_prod.Add_Product(product)
+                                                                contProd += 1
+                                                                pur_de = Purchase_Details(contPur_de,code_pur,quantity,
+                                                                                          code_prod,p_price,sub_total,
+                                                                                          expiration)
+                                                                see_pd.Add_Pur_De(pur_de)
+                                                                contPur_de += 1
                                         contPur = contPur + 1
                                         purchase = Purchase(code_pur,time,supplier,employee,total)
                                         see_p.Add_Pur(purchase)
