@@ -569,7 +569,7 @@ while 0 != 1:
                                                 else:
                                                     sub_total = price * quantity
                                                     total = total + sub_total
-                                                    sell_de = Sells_Details(code_sell_de,quantity,product,price,sub_total)
+                                                    sell_de = Sells_Details(code_sell_de,quantity,product,price,sub_total,code_sell)
                                                     see_sell_de.Add_Seller_Details(sell_de)
                                         sell = Sells(code_sell,time,client,employee,total)
                                         see_sell.Add_Seller(sell)
