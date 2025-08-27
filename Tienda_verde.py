@@ -150,6 +150,17 @@ class Mod_Category:
 class Mod_Employee:
     def __init__(self):
         self.employees = {}
+        self.Load_Employee()
+    def Load_Employee(self):
+        try:
+            with open("Empleados.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        Ecode,Name,Phone,Adress,Mail,Salary = line.split(":")
+                        self.employees[Ecode] = {'Nombre':Name,'Telefono':Phone,'Dirección':Adress,'Correo':Mail,'Salario':Salary}
+        except FileNotFoundError:
+            print("El archivo de empleados.txt no existe")
     def Add_Emp(self,emp):
         self.employees[emp.Ecode] = {'Nombre': emp.Name,'Telefono':emp.Phone,'Dirección':emp.Adress,'Correo':emp.Mail,
                                       'Salario':emp.Salary}
@@ -173,8 +184,20 @@ class Mod_Employee:
 class Mod_Supplier:
     def __init__(self):
         self.suppliers = {}
+        self.Load_Supplier()
+    def Load_Supplier(self):
+        try:
+            with open("Proveedores.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        ID_sup,Name,Company,Phone,Adress,Mail,Category = line.split(":")
+                        self.suppliers[ID_sup] = {'Nombre':Name,'Empresa':Company,'Telefono':Phone,'Dirección':Adress,'Correo':Mail,
+                                                  'Categoria':Category}
+        except FileNotFoundError:
+            print("El archivo Proveedores.txt no existe")
     def Add_Sup(self,sup):
-        self.suppliers[sup.ID_Sup] = {'Nombre': sup.Name,'Empresa': sup.Company,'Telefno':sup.Phone,
+        self.suppliers[sup.ID_Sup] = {'Nombre': sup.Name,'Empresa': sup.Company,'Telefono':sup.Phone,
                                       'Dirección': sup.Adress,'Correo':sup.Mail,'Categoria':sup.Category}
     def Show_Sup(self):
         count = 1
@@ -200,6 +223,9 @@ class Mod_Supplier:
 class Mod_Product:
     def __init__(self):
         self.products = {}
+        self.Load_Product()
+    def Load_Product(self):
+        pass
     def Add_Product(self,product):
         self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
                                         'Stock':product.Stock}
