@@ -165,6 +165,10 @@ class Mod_Employee:
                         self.employees[Ecode] = {'Nombre':Name,'Telefono':Phone,'Dirección':Adress,'Correo':Mail,'Salario':Salary}
         except FileNotFoundError:
             print("El archivo de empleados.txt no existe")
+    def Save_Emp(self):
+        with open("Empleados.txt","w", encoding = "utf-8") as file:
+            for code, value in self.employees.items():
+                file.write(f"{code}:{value['Nombre']}:{value['Telefono']}:{value['Dirección']}:{value['Correo']}:{value['Salario']}\n")
     def Add_Emp(self,emp):
         self.employees[emp.Ecode] = {'Nombre': emp.Name,'Telefono':emp.Phone,'Dirección':emp.Adress,'Correo':emp.Mail,
                                       'Salario':emp.Salary}
@@ -200,6 +204,10 @@ class Mod_Supplier:
                                                   'Categoria':Category}
         except FileNotFoundError:
             print("El archivo Proveedores.txt no existe")
+    def Save_Emp(self):
+        with open("Proveedores.txt","w", encoding = "utf-8") as file:
+            for code, value in self.suppliers.items():
+                file.write(f"{code}:{value['Nombre']}:{value['Empresa']}:{value['Telefono']}:{value['Dirección']}:{value['Correo']}:{value['Categoria']}\n")
     def Add_Sup(self,sup):
         self.suppliers[sup.ID_Sup] = {'Nombre': sup.Name,'Empresa': sup.Company,'Telefono':sup.Phone,
                                       'Dirección': sup.Adress,'Correo':sup.Mail,'Categoria':sup.Category}
@@ -238,6 +246,10 @@ class Mod_Product:
                         self.products[ID_pro] = {'Nombre':Name,'Categoria':Category,'Precio':Price,'Stock':Stock}
         except FileNotFoundError:
             print("El archivo Productos.txt  no existe")
+    def Save_Prod(self):
+        with open("Productos.txt","w", encoding = "utf-8") as file:
+            for code, value in self.products.items():
+                file.write(f"{code}:{value['Nombre']}:{value['Categoria']}:{value['Precio']}:{value['Stock']}\n")
     def Add_Product(self,product):
         self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
                                         'Stock':product.Stock}
@@ -293,6 +305,10 @@ class See_Purchase:
                         self.purchases[ID_pur] = {'Fecha':Date,'Proveedor':Supplier,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
             print("El archivo Compras.txt no existe")
+    def Save_Pur(self):
+        with open("Compras.txt","w", encoding = "utf-8") as file:
+            for code, value in self.purchases.items():
+                file.write(f"{code}:{value['Fecha']}:{value['Proveedor']}:{value['Empleado']}:{value['Total']}\n")
     def Add_Pur(self,pur):
         self.purchases[pur.ID_Pur] = {'Fecha':pur.Date,'Proveedor':pur.Supplier,'Empleado':pur.Employee,'Total':pur.Total}
     def Show_Pur(self):
@@ -320,9 +336,13 @@ class See_Purchase_Details:
                     line = line.strip()
                     if line:
                         ID_PD,Purchase,Quantity,Product,Price,SubTotal,Expiration = line.split(":")
-                        self.purchase_Details[ID_PD] = {'Codigo compra': Purchase,'Cantidad': Quantity,'Producto':Product,'Precio':Price,'Subtotal':SubTotal,'Expiration':Expiration}
+                        self.purchase_Details[ID_PD] = {'Codigo compra': Purchase,'Cantidad': Quantity,'Producto':Product,'Precio':Price,'SubTotal':SubTotal,'Caducidad':Expiration}
         except FileNotFoundError:
             print("El archivo DetalleCom.txt no existe")
+    def Save_Pur_De(self):
+        with open("DetalleCom.txt","w", encoding = "utf-8") as file:
+            for code, value in self.purchase_Details.items():
+                file.write(f"{code}:{value['Codigo compra']}:{value['Cantidad']}:{value['Producto']}:{value['Precio']}:{value['SubTotal']}:{value['Caducidad']}\n")
     def Add_Pur_De(self,pur):
         self.purchase_Details[pur.ID_PD] = {'Codigo compra':pur.Purchase,'Cantidad': pur.Quantity, 'Producto':pur.Product,
                                             'Precio': pur.P_Price,'SubTotal': pur.SubTotal, 'Caducidad': pur.Expiration}
@@ -349,6 +369,10 @@ class Mod_Clients:
                         self.clients[Nit] = {'Nombre':Name,'Telefono':Phone,'Dirección':Adress,'Correo':Mail}
         except FileNotFoundError:
             print("El archivo Clientes.txt no existe")
+    def Save_Clients(self):
+        with open("Clientes.txt","w", encoding = "utf-8") as file:
+            for code, value in self.clients.items():
+                file.write(f"{code}:{value['Nombre']}:{value['Telefono']}:{value['Dirección']}:{value['Correo']}\n")
     def Add_Client(self,client):
         self.clients[client.Nit] = {'Nombre': client.Name,'Telefono': client.Phone, 'Dirección': client.Adress,
                                     'Correo': client.Mail}
@@ -384,6 +408,10 @@ class See_Sell:
                         self.sellers[ID_Sell] = {'Fecha':Date,'Cliente':Client,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
             print("El archivo Ventas.txt no existe")
+    def Save_Clients(self):
+        with open("Ventas.txt","w", encoding = "utf-8") as file:
+            for code, value in self.sellers.items():
+                file.write(f"{code}:{value['Fecha']}:{value['Cliente']}:{value['Empleado']}:{value['Total']}\n")
     def Add_Seller(self,seller):
         self.sellers[seller.ID_Sell] = {'Fecha':seller.Date,'Cliente':seller.Client,'Empleado':seller.Employee,'Total':seller.Total}
     def Show_Seller(self):
@@ -414,6 +442,10 @@ class See_Sell_De:
                         self.sellers_details[ID_SD] = {'Cantidad':Quantity,'Producto':Product,'Precio':Price,'Venta':Sell,'Subtotal':SubTotal}
         except FileNotFoundError:
             print("El archivo DetalleVentas.txt no existe")
+    def Save_Sell_D(self):
+        with open("DetalleVentas.txt","w", encoding = "utf-8") as file:
+            for code, value in self.sellers_details.items():
+                file.write(f"{code}:{value['Cantidad']}:{value['Producto']}:{value['Precio']}:{value['Venta']}:{value['Subtotal']}\n")
     def Add_Seller_Details(self,seller):
         self.sellers_details[seller.ID_SD] = {'Cantidad':seller.Quantity,'Producto':seller.Product,'Precio': seller.Price,'Venta': seller.Sell,
                                               'Subtotal': seller.SubTotal}
