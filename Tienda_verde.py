@@ -372,14 +372,14 @@ class See_Sell:
         self.Load_Sells()
     def Load_Sells(self):
         try:
-            with open("Clientes.txt","r", encoding = "utf-8") as file:
+            with open("Ventas.txt","r", encoding = "utf-8") as file:
                 for line in file:
                     line = line.strip()
                     if line:
                         ID_Sell,Date,Client,Employee,Total = line.split(":")
                         self.sellers[ID_Sell] = {'Fecha':Date,'Cliente':Client,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
-            print("El archivo Clientes.txt no existe")
+            print("El archivo Ventas.txt no existe")
     def Add_Seller(self,seller):
         self.sellers[seller.ID_Sell] = {'Fecha':seller.Date,'Cliente':seller.Client,'Empleado':seller.Employee,'Total':seller.Total}
     def Show_Seller(self):
@@ -399,6 +399,17 @@ class See_Sell:
 class See_Sell_De:
     def __init__(self):
         self.sellers_details = {}
+        self.Load_Sell_Details()
+    def Load_Sell_Details(self):
+        try:
+            with open("DetalleVentas.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        ID_SD,Quantity,Product,Price,Sell,SubTotal = line.split(":")
+                        self.sellers_details[ID_SD] = {'Cantidad':Quantity,'Producto':Product,'Precio':Price,'Venta':Sell,'Subtotal':SubTotal}
+        except FileNotFoundError:
+            print("El archivo DetalleVentas.txt no existe")
     def Add_Seller_Details(self,seller):
         self.sellers_details[seller.ID_SD] = {'Cantidad':seller.Quantity,'Producto':seller.Product,'Precio': seller.Price,'Venta': seller.Sell,
                                               'Subtotal': seller.SubTotal}
@@ -766,6 +777,7 @@ while 0 != 1:
                                                     sell_de = Sells_Details(code_sell_de,quantity,product,price,sub_total,code_sell)
                                                     see_sell_de.Add_Seller_Details(sell_de)
                                                     mod_prod.Selling(product,quantity)
+                                                    contSell_de += 1
                                         sell = Sells(code_sell,time,client,employee,total)
                                         see_sell.Add_Seller(sell)
             case "4":
