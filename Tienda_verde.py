@@ -425,16 +425,33 @@ class See_Sell_De:
                 print(f"Producto: {count}")
                 print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']} = SubTotal: {sub}")
                 count = count + 1
+class Codes:
+    def __init__(self):
+        self.Codes = {}
+        self.Load_Codes()
+    def Check_Codes(self):
+        if len(self.Codes) == 0:
+            return False
+        else:
+            return True
+    def Load_Codes(self):
+        try:
+            with open("Codes.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        cC, cE, cP, cPu, cPr, cPud, cCl, cS, cSd = line.split(":")
+                        self.Codes[0]={'C1':cC,'C2':cP,'C3':cPu,'C4':cPr,'C5':cPud,'C6':cCl,'C7':cS,'C8':cSd,'C9':cE}
+        except FileNotFoundError:
+            print("El archivo Codes.txt no existe")
+    def Save_Codes(self,cC,cE,cP,cPu,cPr,cPud,cCl,cS,cSd):
+        with open("Codes.txt","w", encoding = "utf-8") as file:
+            file.write(f"{cC}:{cE}:{cP}:{cPu}:{cPr}:{cPud}:{cCl}:{cS}:{cSd}")
+    def Get_CC(self):
+        cC = self.Codes[0]['C1']
+        return cC
 menus = Menu()
-contC = 0
-contE = 0
-contProv = 0
-contPur = 0
-contProd = 0
-contPur_de = 0
-contCli = 0
-contSell = 0
-contSell_de = 0
+code = Codes()
 mod_c = Mod_Category()
 mod_prov = Mod_Supplier()
 mod_emp = Mod_Employee()
@@ -445,6 +462,19 @@ mod_clie = Mod_Clients()
 see_sell = See_Sell()
 see_sell_de = See_Sell_De()
 first = True
+start = code.Check_Codes()
+if start == False:
+    contC = 0
+    contE = 0
+    contProv = 0
+    contPur = 0
+    contProd = 0
+    contPur_de = 0
+    contCli = 0
+    contSell = 0
+    contSell_de = 0
+else:
+    contC = int(code.Get_CC())
 while 0 != 1:
     try:
         menus.Main_Menu()
@@ -857,6 +887,7 @@ while 0 != 1:
             case "8":
                 print("Gracias por utilizar el programa")
                 mod_c.Save_Cat()
+                code.Save_Codes(contC,contE,contProv,contPur,contProd,contPur_de,contCli,contSell,contSell_de)
                 break
             case _:
                 print("Opción invalida")
