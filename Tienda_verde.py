@@ -456,6 +456,24 @@ class Codes:
     def Get_CP(self):
         cP = self.Codes[0]['C2']
         return cP
+    def Get_CPU(self):
+        cPu = self.Codes[0]['C3']
+        return cPu
+    def Get_CPR(self):
+        cPr = self.Codes[0]['C4']
+        return cPr
+    def Get_CPUD(self):
+        cPud = self.Codes[0]['C5']
+        return cPud
+    def Get_CCL(self):
+        cCl = self.Codes[0]['C6']
+        return cCl
+    def Get_CS(self):
+        cS = self.Codes[0]['C7']
+        return cS
+    def Get_CSD(self):
+        cSd = self.Codes[0]['C8']
+        return cSd
 menus = Menu()
 code = Codes()
 mod_c = Mod_Category()
@@ -483,12 +501,12 @@ else:
     contC = int(code.Get_CC())
     contE = int(code.Get_CE())
     contProv = int(code.Get_CP())
-    contPur = 0
-    contProd = 0
-    contPur_de = 0
-    contCli = 0
-    contSell = 0
-    contSell_de = 0
+    contPur = int(code.Get_CPU())
+    contProd = int(code.Get_CPR())
+    contPur_de = int(code.Get_CPUD())
+    contCli = int(code.Get_CCL())
+    contSell = int(code.Get_CS())
+    contSell_de = int(code.Get_CSD())
 while 0 != 1:
     try:
         menus.Main_Menu()
