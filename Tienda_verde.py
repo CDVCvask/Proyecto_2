@@ -124,7 +124,7 @@ class Mod_Category:
     def Save_Cat(self):
         with open("Categorias.txt","w", encoding = "utf-8") as file:
             for code, value in self.categorys.items():
-                file.write(f"{code}:{value['Nombre']}")
+                file.write(f"{code}:{value['Nombre']}\n")
     def Add_Cat(self,cat):
         self.categorys[cat.Cat_Code] = {'Nombre': cat.Name}
     def Check_C(self):
@@ -473,7 +473,6 @@ while 0 != 1:
                                 count = count + 1
                                 contC = contC + 1
                                 mod_c.Add_Cat(cat)
-                                mod_c.Save_Cat(cat)
                     case "2":
                         count = 0
                         num = int(input("Cuantos empleados desea ingresar:"))
