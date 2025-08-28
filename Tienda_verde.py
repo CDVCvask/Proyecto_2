@@ -225,7 +225,15 @@ class Mod_Product:
         self.products = {}
         self.Load_Product()
     def Load_Product(self):
-        pass
+        try:
+            with open("Productos.txt", "r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        ID_pro,Name,Category,Price,Stock = line.split(":")
+                        self.products[ID_pro] = {'Nombre':Name,'Categoria':Category,'Precio':Price,'Stock':Stock}
+        except FileNotFoundError:
+            print("El archivo Productos.txt  no existe")
     def Add_Product(self,product):
         self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
                                         'Stock':product.Stock}
@@ -270,6 +278,17 @@ class Mod_Product:
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
+        self.Load_Purchase()
+    def Load_Purchase(self):
+        try:
+            with open("Compras.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        ID_pur,Date,Supplier,Employee,Total = line.split(":")
+                        self.purchases[ID_pur] = {'Fecha':Date,'Proveedor':Supplier,'Empleado':Employee,'Total':Total}
+        except FileNotFoundError:
+            print("El archivo Compras.txt no existe")
     def Add_Pur(self,pur):
         self.purchases[pur.ID_Pur] = {'Fecha':pur.Date,'Proveedor':pur.Supplier,'Empleado':pur.Employee,'Total':pur.Total}
     def Show_Pur(self):
@@ -289,6 +308,17 @@ class See_Purchase:
 class See_Purchase_Details:
     def __init__(self):
         self.purchase_Details = {}
+        self.Load_Purchase_Details()
+    def Load_Purchase_Details(self):
+        try:
+            with open("DetalleCom.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        ID_PD,Purchase,Quantity,Product,Price,SubTotal,Expiration = line.split(":")
+                        self.purchase_Details[ID_PD] = {'Codigo compra': Purchase,'Cantidad': Quantity,'Producto':Product,'Precio':Price,'Subtotal':SubTotal,'Expiration':Expiration}
+        except FileNotFoundError:
+            print("El archivo DetalleCom.txt no existe")
     def Add_Pur_De(self,pur):
         self.purchase_Details[pur.ID_PD] = {'Codigo compra':pur.Purchase,'Cantidad': pur.Quantity, 'Producto':pur.Product,
                                             'Precio': pur.P_Price,'SubTotal': pur.SubTotal, 'Caducidad': pur.Expiration}
@@ -304,6 +334,17 @@ class See_Purchase_Details:
 class Mod_Clients:
     def __init__(self):
         self.clients = {}
+        self.Load_Clients()
+    def Load_Clients(self):
+        try:
+            with open("Clientes.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        Nit,Name,Phone,Adress,Mail = line.split(":")
+                        self.clients[Nit] = {'Nombre':Name,'Telefono':Phone,'Dirección':Adress,'Correo':Mail}
+        except FileNotFoundError:
+            print("El archivo Clientes.txt no existe")
     def Add_Client(self,client):
         self.clients[client.Nit] = {'Nombre': client.Name,'Telefono': client.Phone, 'Dirección': client.Adress,
                                     'Correo': client.Mail}
@@ -328,6 +369,17 @@ class Mod_Clients:
 class See_Sell:
     def __init__(self):
         self.sellers = {}
+        self.Load_Sells()
+    def Load_Sells(self):
+        try:
+            with open("Clientes.txt","r", encoding = "utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        ID_Sell,Date,Client,Employee,Total = line.split(":")
+                        self.sellers[ID_Sell] = {'Fecha':Date,'Cliente':Client,'Empleado':Employee,'Total':Total}
+        except FileNotFoundError:
+            print("El archivo Clientes.txt no existe")
     def Add_Seller(self,seller):
         self.sellers[seller.ID_Sell] = {'Fecha':seller.Date,'Cliente':seller.Client,'Empleado':seller.Employee,'Total':seller.Total}
     def Show_Seller(self):
