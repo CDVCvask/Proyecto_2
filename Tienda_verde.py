@@ -450,6 +450,12 @@ class Codes:
     def Get_CC(self):
         cC = self.Codes[0]['C1']
         return cC
+    def Get_CE(self):
+        cE = self.Codes[0]['C9']
+        return cE
+    def Get_CP(self):
+        cP = self.Codes[0]['C2']
+        return cP
 menus = Menu()
 code = Codes()
 mod_c = Mod_Category()
@@ -475,6 +481,14 @@ if start == False:
     contSell_de = 0
 else:
     contC = int(code.Get_CC())
+    contE = int(code.Get_CE())
+    contProv = int(code.Get_CP())
+    contPur = 0
+    contProd = 0
+    contPur_de = 0
+    contCli = 0
+    contSell = 0
+    contSell_de = 0
 while 0 != 1:
     try:
         menus.Main_Menu()
