@@ -121,6 +121,10 @@ class Mod_Category:
                         self.categorys[Cat_Code] = {'Nombre':Name}
         except FileNotFoundError:
             print("No existe el archivo de categorias.txt")
+    def Save_Cat(self):
+        with open("Categorias.txt","w", encoding = "utf-8") as file:
+            for code, value in self.categorys.items():
+                file.write(f"{code}:{value['Nombre']}")
     def Add_Cat(self,cat):
         self.categorys[cat.Cat_Code] = {'Nombre': cat.Name}
     def Check_C(self):
@@ -469,6 +473,7 @@ while 0 != 1:
                                 count = count + 1
                                 contC = contC + 1
                                 mod_c.Add_Cat(cat)
+                                mod_c.Save_Cat(cat)
                     case "2":
                         count = 0
                         num = int(input("Cuantos empleados desea ingresar:"))
@@ -852,6 +857,7 @@ while 0 != 1:
                 pass
             case "8":
                 print("Gracias por utilizar el programa")
+                mod_c.Save_Cat()
                 break
             case _:
                 print("Opción invalida")
