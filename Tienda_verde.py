@@ -408,7 +408,7 @@ class See_Sell:
                         self.sellers[ID_Sell] = {'Fecha':Date,'Cliente':Client,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
             print("El archivo Ventas.txt no existe")
-    def Save_Clients(self):
+    def Save_Sells(self):
         with open("Ventas.txt","w", encoding = "utf-8") as file:
             for code, value in self.sellers.items():
                 file.write(f"{code}:{value['Fecha']}:{value['Cliente']}:{value['Empleado']}:{value['Total']}\n")
@@ -952,6 +952,14 @@ while 0 != 1:
                 print("Gracias por utilizar el programa")
                 mod_c.Save_Cat()
                 code.Save_Codes(contC,contE,contProv,contPur,contProd,contPur_de,contCli,contSell,contSell_de)
+                mod_emp.Save_Emp()
+                mod_prov.Save_Prov()
+                mod_prod.Save_Prod()
+                mod_clie.Save_Clients()
+                see_p.Save_Pur()
+                see_pd.Save_Pur_De()
+                see_sell.Save_Sells()
+                see_sell_de.Save_Sell_D()
                 break
             case _:
                 print("Opción invalida")
