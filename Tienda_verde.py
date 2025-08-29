@@ -291,6 +291,10 @@ class Mod_Product:
         for key,value in self.products.items():
             if code == key:
                 value['Stock'] = value['Stock'] + quantity
+    def Modify(self,new_price,code):
+        for key,value in self.products.items():
+            if code == key:
+                value['Precio'] = new_price
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
@@ -325,6 +329,11 @@ class See_Purchase:
             return False
         else:
             return True
+    def Get_TotalP(self):
+        total = 0
+        for key,value in self.purchases.items():
+            total += value['Total']
+        return total
 class See_Purchase_Details:
     def __init__(self):
         self.purchase_Details = {}
@@ -428,6 +437,11 @@ class See_Sell:
             return False
         else:
             return True
+    def Get_TotalS(self):
+        total = 0
+        for key,value in self.sellers.items():
+            total = total + value['Total']
+        return total
 class See_Sell_De:
     def __init__(self):
         self.sellers_details = {}
@@ -644,7 +658,8 @@ while 0 != 1:
                                 mod_clie.Add_Client(client)
                                 contCli = contCli + 1
                     case "5":
-                        pass
+                        print("Regresando al menu principal")
+                        print(" ")
                     case _:
                         print("La opción seleccionada no es valida")
             case "2":
@@ -825,7 +840,8 @@ while 0 != 1:
                                             purchase = Purchase(code_pur, time, supplier, employee, total)
                                             see_p.Add_Pur(purchase)
                                 case "3":
-                                    pass
+                                    print("Regresando al menu principal")
+                                    print(" ")
                                 case _:
                                     print("La opción seleccionada no es valida")
             case "3":
@@ -916,9 +932,19 @@ while 0 != 1:
                         else:
                             see_sell.Show_Seller()
                     case "3":
-                        pass
+                        sell = see_sell.Get_TotalS()
+                        pur = see_p.Get_TotalP()
+                        total = int(sell) - int(pur)
+                        print(f"La ganancia de la tienda es: {total}")
+                        if total <0:
+                            print("Estamos teniendo perdidas")
+                        elif total == 0:
+                            print("No hay perdidas ni ganancias")
+                        elif total > 0:
+                            print("Estamos teniendo ganancias")
                     case "4":
-                        pass
+                        print("Regresando al menu principal")
+                        print(" ")
                     case _:
                         print("La opción seleccionada no es valida")
             case "6":
@@ -948,7 +974,17 @@ while 0 != 1:
                     case _:
                         print("Opción ingresada no valida")
             case "7":
-                pass
+                product = input("Ingrese el código del producto a modificar: ")
+                mod = mod_prod.Find_Product(product)
+                if mod == False:
+                    print("No existe ningún codigo que coincida")
+                else:
+                    new_price = int(input("Ingrese el nuevo precio del producto: "))
+                    if new_price <= 0:
+                        print("La cantidad ingresada no es valida")
+                    else:
+                        mod_prod.Modify(new_price,product)
+                        print("Precio cambiado exitosamente")
             case "8":
                 print("Gracias por utilizar el programa")
                 mod_c.Save_Cat()
