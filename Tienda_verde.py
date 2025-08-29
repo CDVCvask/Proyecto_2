@@ -574,7 +574,6 @@ see_pd = See_Purchase_Details()
 mod_clie = Mod_Clients()
 see_sell = See_Sell()
 see_sell_de = See_Sell_De()
-first = True
 start = code.Check_Codes()
 contLog = 0
 exit = -1
@@ -912,13 +911,251 @@ else:
                     opt = input("Ingrese la opción que desee: ")
                     match opt:
                         case "1":
-                            pass
+                            num = int(input("Cuantas categorías desea ingresar: "))
+                            if num <= 0:
+                                print("La cantidad ingresada no es valida")
+                            else:
+                                for i in range(num):
+                                    cat_code = f"C{contC}"
+                                    while 0 != 1:
+                                        print(f"Ingreso de la categoría {count}")
+                                        name = input("Ingrese el nombre de la categoria: ")
+                                        if name == "":
+                                            print("No puede dejar este espacio en blanco")
+                                        else:
+                                            break
+                                    cat = Category(cat_code, name)
+                                    count = count + 1
+                                    contC = contC + 1
+                                    mod_c.Add_Cat(cat)
                         case "2":
-                            pass
+                            empty = mod_emp.Check_Emp()
+                            empty1 = mod_prov.Check_Sup()
+                            if empty == False:
+                                print("No se pueden realizar compras porque no hay empleados registrados")
+                            else:
+                                if empty1 == False:
+                                    print("No se pueden realizar compras porque no hay proveedores registrados")
+                                else:
+                                    check = mod_prod.Check_Product()
+                                    if check == False:
+                                        employee = input("Ingrese el código del empleado a cargo de la compra: ")
+                                        look = mod_emp.Find_Emp(employee)
+                                        if look == -1:
+                                            print("No hay ningún empleado con ese código")
+                                        else:
+                                            supplier = input("Ingrese el código del proveedor a cargo de la venta")
+                                            look = mod_prov.Find_Sup(supplier)
+                                            if look == -1:
+                                                print("No existe ningún proveedor con ese código")
+                                            else:
+                                                num = int(
+                                                    input("Cuantos productos se van a comprar(tipos, no cantidad total): "))
+                                                if num <= 0:
+                                                    print("La cantidad ingresada no es valida")
+                                                else:
+                                                    code_pur = f"Com{contPur}"
+                                                    total = 0
+                                                    time = datetime.now()
+                                                    for i in range(num):
+                                                        code_prod = f"Prod{contProd}"
+                                                        code_pur_de = f"PurDe{contPur_de}"
+                                                        name = input("Ingrese el nombre del producto: ")
+                                                        if name == "":
+                                                            print("No puede dejar este espacio vacío")
+                                                        else:
+                                                            category = input("Ingrese el código de la categoría del producto")
+                                                            find = mod_c.Find_Cat(category)
+                                                            if find == -1:
+                                                                print("No se a encontrado ninguna categoría con ese código")
+                                                            else:
+                                                                s_price = int(
+                                                                    input("Ingrese el precio de venta del producto: "))
+                                                                if s_price <= 0:
+                                                                    print("El precio ingresado no es valido")
+                                                                else:
+                                                                    quantity = int(
+                                                                        input("Ingrese la cantidad de este producto que va"
+                                                                              " a comprar"))
+                                                                    if quantity <= 0:
+                                                                        print("La cantidad ingresada no es valida")
+                                                                    else:
+                                                                        p_price = int(
+                                                                            input("Ingrese el precio de compra del producto: "))
+                                                                        if p_price <= 0:
+                                                                            print("El precio ingresado no es valido")
+                                                                        else:
+                                                                            sub_total = p_price * quantity
+                                                                            total = total + sub_total
+                                                                            expiration = input("Ingrese la fecha de caducidad"
+                                                                                               " del producto(Si no tiene deje el espacio"
+                                                                                               "en blanco: ")
+                                                                            if expiration == "":
+                                                                                expiration = "N/A"
+                                                                            product = Products(code_prod, name, category,
+                                                                                               s_price, quantity, 0)
+                                                                            mod_prod.Add_Product(product)
+                                                                            contProd += 1
+                                                                            pur_de = Purchase_Details(code_pur_de, code_pur,
+                                                                                                      quantity,
+                                                                                                      code_prod, p_price,
+                                                                                                      sub_total,
+                                                                                                      expiration)
+                                                                            see_pd.Add_Pur_De(pur_de)
+                                                                            contPur_de += 1
+                                                    contPur = contPur + 1
+                                                    purchase = Purchase(code_pur, time, supplier, employee, total)
+                                                    see_p.Add_Pur(purchase)
+                                    else:
+                                        menus.Pur_Menu()
+                                        opt1 = input("Ingrese la opción que desee: ")
+                                        match opt1:
+                                            case "1":
+                                                employee = input("Ingrese el código del empleado a cargo de la compra: ")
+                                                look = mod_emp.Find_Emp(employee)
+                                                if look == -1:
+                                                    print("No hay ningún empleado con ese código")
+                                                else:
+                                                    supplier = input("Ingrese el código del proveedor a cargo de la venta")
+                                                    look = mod_prov.Find_Sup(supplier)
+                                                    if look == -1:
+                                                        print("No existe ningún proveedor con ese código")
+                                                    else:
+                                                        num = int(input(
+                                                            "Cuantos productos se van a comprar(tipos, no cantidad total): "))
+                                                        if num <= 0:
+                                                            print("La cantidad ingresada no es valida")
+                                                        else:
+                                                            code_pur = f"Com{contPur}"
+                                                            total = 0
+                                                            time = datetime.now()
+                                                            for i in range(num):
+                                                                code_prod = f"Prod{contProd}"
+                                                                code_pur_de = f"PurDe{contPur_de}"
+                                                                name = input("Ingrese el nombre del producto: ")
+                                                                if name == "":
+                                                                    print("No puede dejar este espacio vacío")
+                                                                else:
+                                                                    category = input(
+                                                                        "Ingrese el código de la categoría del producto")
+                                                                    find = mod_c.Find_Cat(category)
+                                                                    if find == -1:
+                                                                        print(
+                                                                            "No se a encontrado ninguna categoría con ese código")
+                                                                    else:
+                                                                        s_price = int(
+                                                                            input("Ingrese el precio de venta del producto: "))
+                                                                        if s_price <= 0:
+                                                                            print("El precio ingresado no es valido")
+                                                                        else:
+                                                                            quantity = int(
+                                                                                input(
+                                                                                    "Ingrese la cantidad de este producto que va"
+                                                                                    " a comprar"))
+                                                                            if quantity <= 0:
+                                                                                print("La cantidad ingresada no es valida")
+                                                                            else:
+                                                                                p_price = int(
+                                                                                    input(
+                                                                                        "Ingrese el precio de compra del producto: "))
+                                                                                if p_price <= 0:
+                                                                                    print("El precio ingresado no es valido")
+                                                                                else:
+                                                                                    sub_total = p_price * quantity
+                                                                                    total = total + sub_total
+                                                                                    expiration = input(
+                                                                                        "Ingrese la fecha de caducidad"
+                                                                                        " del producto(Si no tiene deje el espacio"
+                                                                                        "en blanco: ")
+                                                                                    if expiration == "":
+                                                                                        expiration = "N/A"
+                                                                                    product = Products(code_prod, name,
+                                                                                                       category,
+                                                                                                       s_price, quantity, 0)
+                                                                                    mod_prod.Add_Product(product)
+                                                                                    contProd += 1
+                                                                                    pur_de = Purchase_Details(contPur_de,
+                                                                                                              code_pur,
+                                                                                                              quantity,
+                                                                                                              code_prod,
+                                                                                                              p_price,
+                                                                                                              sub_total,
+                                                                                                              expiration)
+                                                                                    see_pd.Add_Pur_De(pur_de)
+                                                                                    contPur_de += 1
+                                                            contPur = contPur + 1
+                                                            purchase = Purchase(code_pur, time, supplier, employee, total)
+                                                            see_p.Add_Pur(purchase)
+                                            case "2":
+                                                total = 0
+                                                employee = input("Ingrese el código del empleado a cargo de la compra: ")
+                                                look = mod_emp.Find_Emp(employee)
+                                                if look == -1:
+                                                    print("No hay ningún empleado con ese código")
+                                                else:
+                                                    supplier = input("Ingrese el código del proveedor a cargo de la venta")
+                                                    look = mod_prov.Find_Sup(supplier)
+                                                    if look == -1:
+                                                        print("No existe ningún proveedor con ese código")
+                                                    else:
+                                                        code_pur = f"Com{contPur}"
+                                                        time = datetime.now()
+                                                        while 0 != 1:
+                                                            code_pur_de = f"PurDe{contPur_de}"
+                                                            product = input("Ingrese el código del producto para restock: ")
+                                                            look = mod_prod.Find_Product(product)
+                                                            if product == "CALLIOPE":
+                                                                break
+                                                            if look == -1:
+                                                                print("No se encontró ningún producto con ese código")
+                                                            else:
+                                                                quantity = int(input("Cuantas unidades va a comprar: "))
+                                                                price = mod_prod.Get_Price(product)
+                                                                expiration = input(
+                                                                    "Ingrese la fecha de caducidad"" del producto(Si no tiene deje el espacio"
+                                                                    "en blanco: ")
+                                                                if expiration == "":
+                                                                    expiration = "N/A"
+                                                                subtotal = quantity * price
+                                                                total = total + subtotal
+                                                                pur_de = Purchase_Details(contPur_de, code_pur, quantity,
+                                                                                          code_prod, price, subtotal,
+                                                                                          expiration)
+                                                                contPur_de += 1
+                                                        contPur = contPur + 1
+                                                        purchase = Purchase(code_pur, time, supplier, employee, total)
+                                                        see_p.Add_Pur(purchase)
+                                            case "3":
+                                                print("Regresando al menu principal")
+                                                print(" ")
+                                            case _:
+                                                print("La opción seleccionada no es valida")
                         case "3":
-                            pass
+                            menus.Inv_Menu()
+                            opt1 = input("Seleccione que parte del inventario desea ver: ")
+                            match opt1:
+                                case "1":
+                                    empty = mod_prod.Check_Product()
+                                    if empty == False:
+                                        print("No hay ningún producto que mostrar")
+                                    else:
+                                        mod_prod.Show_Product()
+                                case "2":
+                                    empty = mod_c.Check_C()
+                                    if empty == False:
+                                        print("No hay ninguna categoría que mostrar")
+                                    else:
+                                        mod_c.Show_Cat()
+                                case "3":
+                                    pass
+                                case _:
+                                    print("La opción selecionada no es valida")
                         case "4":
-                            pass
+                            empty = see_p.Check_Pur()
+                            if empty == False:
+                                print("No hay ninguna compra que mostrar")
+                            else:
+                                see_p.Show_Pur()
                         case "5":
                             print("Gracias por utilizar el programa: ")
                             mod_c.Save_Cat()
@@ -1087,7 +1324,8 @@ else:
                                 if empty1 == False:
                                     print("No se pueden realizar compras porque no hay proveedores registrados")
                                 else:
-                                    if first == True:
+                                    check = mod_prod.Check_Product()
+                                    if  check == False:
                                         employee = input("Ingrese el código del empleado a cargo de la compra: ")
                                         look = mod_emp.Find_Emp(employee)
                                         if look == -1:
@@ -1149,7 +1387,6 @@ else:
                                                     contPur = contPur + 1
                                                     purchase = Purchase(code_pur,time,supplier,employee,total)
                                                     see_p.Add_Pur(purchase)
-                                                    first = False
                                     else:
                                         menus.Pur_Menu()
                                         opt1 = input("Ingrese la opción que desee: ")
