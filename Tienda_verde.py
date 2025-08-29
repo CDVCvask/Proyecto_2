@@ -204,7 +204,7 @@ class Mod_Supplier:
                                                   'Categoria':Category}
         except FileNotFoundError:
             print("El archivo Proveedores.txt no existe")
-    def Save_Emp(self):
+    def Save_Prov(self):
         with open("Proveedores.txt","w", encoding = "utf-8") as file:
             for code, value in self.suppliers.items():
                 file.write(f"{code}:{value['Nombre']}:{value['Empresa']}:{value['Telefono']}:{value['Dirección']}:{value['Correo']}:{value['Categoria']}\n")
