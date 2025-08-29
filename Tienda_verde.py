@@ -606,6 +606,7 @@ while True:
     if login == "":
         contLog = contLog + 1
         print("Usuario o contraseña incorrectos")
+        print(" ")
     else:
         exit = -2
         break
@@ -615,6 +616,7 @@ while True:
         break
 if exit == -1:
     print("Saliendo del programa")
+    input(" ")
 else:
     name = mod_emp.Get_Name(login)
     pos = mod_emp.Get_Position(login)
