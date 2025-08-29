@@ -249,7 +249,7 @@ class Mod_Product:
     def Save_Prod(self):
         with open("Productos.txt","w", encoding = "utf-8") as file:
             for code, value in self.products.items():
-                file.write(f"{code}:{value['Nombre']}:{value['Categoria']}:{value['Precio']}:{value['Stock']}\n")
+                file.write(f"{code}:{value['Nombre']}:{value['Categoría']}:{value['Precio']}:{value['Stock']}\n")
     def Add_Product(self,product):
         self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
                                         'Stock':product.Stock}
@@ -301,14 +301,14 @@ class See_Purchase:
                 for line in file:
                     line = line.strip()
                     if line:
-                        ID_pur,Date,Supplier,Employee,Total = line.split(":")
+                        ID_pur,Date,Supplier,Employee,Total = line.split("/")
                         self.purchases[ID_pur] = {'Fecha':Date,'Proveedor':Supplier,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
             print("El archivo Compras.txt no existe")
     def Save_Pur(self):
         with open("Compras.txt","w", encoding = "utf-8") as file:
             for code, value in self.purchases.items():
-                file.write(f"{code}:{value['Fecha']}:{value['Proveedor']}:{value['Empleado']}:{value['Total']}\n")
+                file.write(f"{code}/{value['Fecha']}/{value['Proveedor']}/{value['Empleado']}/{value['Total']}\n")
     def Add_Pur(self,pur):
         self.purchases[pur.ID_Pur] = {'Fecha':pur.Date,'Proveedor':pur.Supplier,'Empleado':pur.Employee,'Total':pur.Total}
     def Show_Pur(self):
@@ -710,7 +710,7 @@ while 0 != 1:
                                                                                    s_price,quantity,0)
                                                                 mod_prod.Add_Product(product)
                                                                 contProd += 1
-                                                                pur_de = Purchase_Details(contPur_de,code_pur,quantity,
+                                                                pur_de = Purchase_Details(code_pur_de,code_pur,quantity,
                                                                                           code_prod,p_price,sub_total,
                                                                                           expiration)
                                                                 see_pd.Add_Pur_De(pur_de)
