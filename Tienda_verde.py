@@ -39,6 +39,26 @@ class Menu:
         print("3.Proveedores")
         print("4.Clientes")
         print("5.Salir")
+    def Admin_Menu(self):
+        print("Menu Administrador")
+        print("1.Agregar Empleados")
+        print("2.Agregar Proveedores")
+        print("3.Movimientos")
+        print("4.Personas")
+        print("5.Inventario")
+        print("5.Salir")
+    def Salesman_Menu(self):
+        print("Menu Ventas")
+        print("1.Realizar venta")
+        print("2.Ver ventas")
+        print("3.Salir")
+    def Buyer_Menu(self):
+        print("Menu Bodeguero")
+        print("1.Agregar categorías")
+        print("2.Realizar compra")
+        print("3.Inventario")
+        print("4.Compras")
+        print("5.Salir")
 class Clients:
     def __init__(self, Nit,Name,Phone,Adress,Mail):
         self.Nit = Nit
