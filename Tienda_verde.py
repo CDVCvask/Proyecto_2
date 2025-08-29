@@ -46,7 +46,8 @@ class Menu:
         print("3.Movimientos")
         print("4.Personas")
         print("5.Inventario")
-        print("6.Salir")
+        print("6.Modificar productos")
+        print("7.Salir")
     def Salesman_Menu(self):
         print("Menu Ventas")
         print("1.Realizar venta")
@@ -626,16 +627,183 @@ else:
                     opt = input("Ingrese la opción que desee: ")
                     match opt:
                         case "1":
-                            pass
+                            count = 0
+                            num = int(input("Cuantos empleados desea ingresar:"))
+                            if num <= 0:
+                                print("La cantidad ingresada no es valida")
+                            else:
+                                for i in range(num):
+                                    emp_code = f"E{contE}"
+                                    while 0 != 1:
+                                        print(f"Ingreso de la empleado {count + 1}")
+                                        name = input("Ingrese el nombre del empleado/a: ")
+                                        if name == "":
+                                            print("No puede dejar el espacio en blanco")
+                                        else:
+                                            phone = input("Ingrese su telefono: ")
+                                            adress = input("Ingrese su dirección: ")
+                                            mail = input("Ingrese su correo: ")
+                                            position = input("Ingrese el puesto del empleado(Admin/Vendedor/Bodeguero)")
+                                            if position.lower() == "vendedor":
+                                                salary = 3500
+                                                user = input("Ingrese el usuario del empleado: ")
+                                                if user == "":
+                                                    print("No se puede dejar el espacio en blanco")
+                                                else:
+                                                    password = input("Ingrese su contraseña: ")
+                                                    if password == "":
+                                                        print("No puede dejar el espacio en blanco")
+                                                    else:
+                                                        break
+                                            elif position.lower() == "admin":
+                                                salary = 10000
+                                                user = input("Ingrese el usuario del empleado: ")
+                                                if user == "":
+                                                    print("No se puede dejar el espacio en blanco")
+                                                else:
+                                                    password = input("Ingrese su contraseña: ")
+                                                    if password == "":
+                                                        print("No puede dejar el espacio en blanco")
+                                                    else:
+                                                        break
+                                            elif position.lower() == "bodeguero":
+                                                salary = 5000
+                                                user = input("Ingrese el usuario del empleado: ")
+                                                if user == "":
+                                                    print("No se puede dejar el espacio en blanco")
+                                                else:
+                                                    password = input("Ingrese su contraseña: ")
+                                                    if password == "":
+                                                        print("No puede dejar el espacio en blanco")
+                                                    else:
+                                                        break
+                                            else:
+                                                print("No es un puesto valido")
+                                    emp = Employees(emp_code, name, phone, adress, mail, salary, user, password, position)
+                                    count = count + 1
+                                    contE = contE + 1
+                                    mod_emp.Add_Emp(emp)
                         case "2":
-                            pass
+                            count = 0
+                            num = int(input("Cuantos prooverdores desea ingresar: "))
+                            if num <= 0:
+                                print("La cantidad ingresada no es valida")
+                            else:
+                                for i in range(num):
+                                    Prov_code = f"Prov{contProv}"
+                                    while 0 != 1:
+                                        print(f"Ingreso de la prooverdore {count + 1}")
+                                        name = input("Ingrese el nombre del prooverdore: ")
+                                        if name == "":
+                                            print("No puede dejar este espacio en blanco")
+                                        else:
+                                            Company = input(
+                                                "Ingrese el nombre de su empresa(Si no tiene deje en blanco el espacio: ")
+                                            if Company == "":
+                                                Company = "N/A"
+                                            phone = input("Ingrese el telefono del prooverdor: ")
+                                            adress = input("Ingrese la dirección del proveedor: ")
+                                            mail = input("Ingrese el correo del proveedor:")
+                                            category = input("Ingrese el código de la categoría que provee: ")
+                                            find = mod_c.Find_Cat(category)
+                                            if find == -1:
+                                                print("No se a encontrado ninguna categoría con ese código")
+                                            else:
+                                                break
+                                    supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
+                                    mod_prov.Add_Sup(supplier)
+                                    contProv = contProv + 1
                         case "3":
-                            pass
+                            menus.Move_Menu()
+                            opt1 = input("Seleccione cual movimiento desea ver: ")
+                            match opt1:
+                                case "1":
+                                    empty = see_p.Check_Pur()
+                                    if empty == False:
+                                        print("No hay ninguna compra que mostrar")
+                                    else:
+                                        see_p.Show_Pur()
+                                case "2":
+                                    empty = see_sell.Check_Sell()
+                                    if empty == False:
+                                        print("No hay ninguna venta que mostrar")
+                                    else:
+                                        see_sell.Show_Seller()
+                                case "3":
+                                    sell = see_sell.Get_TotalS()
+                                    pur = see_p.Get_TotalP()
+                                    total = int(sell) - int(pur)
+                                    print(f"La ganancia de la tienda es: {total}")
+                                    if total < 0:
+                                        print("Estamos teniendo perdidas")
+                                    elif total == 0:
+                                        print("No hay perdidas ni ganancias")
+                                    elif total > 0:
+                                        print("Estamos teniendo ganancias")
+                                case "4":
+                                    print("Regresando al menu principal")
+                                    print(" ")
+                                case _:
+                                    print("La opción seleccionada no es valida")
                         case "4":
-                            pass
+                            menus.Per_Menu()
+                            opt1 = input("Seleccione el ingreso que desea ver: ")
+                            match opt1:
+                                case "1":
+                                    empty = mod_emp.Check_Emp()
+                                    if empty == False:
+                                        print("No hay ningún empleado que mostrar")
+                                    else:
+                                        mod_emp.Show_Emp()
+                                case "2":
+                                    empty = mod_prov.Check_Sup()
+                                    if empty == False:
+                                        print("No hay ningún proveedor que mostrar")
+                                    else:
+                                        mod_prov.Show_Sup()
+                                case "3":
+                                    empty = mod_clie.Check_Client()
+                                    if empty == False:
+                                        print("No hay ningún cliente que mostrar")
+                                    else:
+                                        mod_clie.Show_Client()
+                                case "4":
+                                    pass
+                                case _:
+                                    print("Opción ingresada no valida")
                         case "5":
-                            pass
+                            menus.Inv_Menu()
+                            opt1 = input("Seleccione que parte del inventario desea ver: ")
+                            match opt1:
+                                case "1":
+                                    empty = mod_prod.Check_Product()
+                                    if empty == False:
+                                        print("No hay ningún producto que mostrar")
+                                    else:
+                                        mod_prod.Show_Product()
+                                case "2":
+                                    empty = mod_c.Check_C()
+                                    if empty == False:
+                                        print("No hay ninguna categoría que mostrar")
+                                    else:
+                                        mod_c.Show_Cat()
+                                case "3":
+                                    pass
+                                case _:
+                                    print("La opción selecionada no es valida")
                         case "6":
+                            product = input("Ingrese el código del producto a modificar: ")
+                            mod = mod_prod.Find_Product(product)
+                            if mod == False:
+                                print("No existe ningún codigo que coincida")
+                            else:
+                                new_price = int(input("Ingrese el nuevo precio del producto: "))
+                                if new_price <= 0:
+                                    print("La cantidad ingresada no es valida")
+                                else:
+                                    mod_prod.Modify(new_price, product)
+                                    print("Precio cambiado exitosamente")
+                        case "7":
                             print("Gracias por utilizar el programa: ")
                             mod_c.Save_Cat()
                             code.Save_Codes(contC, contE, contProv, contPur, contProd, contPur_de, contCli, contSell,
