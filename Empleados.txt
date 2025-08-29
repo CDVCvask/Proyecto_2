@@ -1,4 +1,4 @@
-E0:1:1:1:1:1
-E1:2:2:2:2:2
-E2:3:3:3:3:3
-E3:4:4:4:4:4
+E4:Franky:123455:Chile:Tian:10000:admin:Xie Lian:Hua Cheng
+E5:Gojo:45848896:Tokyo:Sixeyes@gmail.com:50000:Master:Satoru:KRONOS
+E6:A:111:Casa:jjk:3500:vendedor:Juan:12345
+E7:B:222:edificio:@Gmail:5000:bodeguero:Yuno:ABCD
