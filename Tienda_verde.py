@@ -46,7 +46,7 @@ class Menu:
         print("3.Movimientos")
         print("4.Personas")
         print("5.Inventario")
-        print("5.Salir")
+        print("6.Salir")
     def Salesman_Menu(self):
         print("Menu Ventas")
         print("1.Realizar venta")
@@ -618,24 +618,155 @@ else:
     pos = mod_emp.Get_Position(login)
     print(f"Bienvenido {name}")
     pos = pos.lower()
-    print(f"puesto: {pos}")
     match pos:
         case "admin":
             while 0 != 1:
                 try:
                     menus.Admin_Menu()
+                    opt = input("Ingrese la opción que desee: ")
+                    match opt:
+                        case "1":
+                            pass
+                        case "2":
+                            pass
+                        case "3":
+                            pass
+                        case "4":
+                            pass
+                        case "5":
+                            pass
+                        case "6":
+                            print("Gracias por utilizar el programa: ")
+                            mod_c.Save_Cat()
+                            code.Save_Codes(contC, contE, contProv, contPur, contProd, contPur_de, contCli, contSell,
+                                            contSell_de)
+                            mod_emp.Save_Emp()
+                            mod_prov.Save_Prov()
+                            mod_prod.Save_Prod()
+                            mod_clie.Save_Clients()
+                            see_p.Save_Pur()
+                            see_pd.Save_Pur_De()
+                            see_sell.Save_Sells()
+                            see_sell_de.Save_Sell_D()
+                            break
+                        case _:
+                            print("OPCION INVALIDA")
                 except ValueError:
                     print("El tipo de dato ingresado no es valido")
         case "vendedor":
             while 0 != 1:
                 try:
                     menus.Salesman_Menu()
+                    opt = input("Ingrese la opción que desee: ")
+                    match opt:
+                        case "1":
+                            empty = mod_emp.Check_Emp()
+                            if empty == False:
+                                print("No se pueden realizar ventas si no hay empleados")
+                            else:
+                                empty1 = mod_clie.Check_Client()
+                                if empty1 == False:
+                                    print("No se pueden realizar ventas si no hay clientes")
+                                else:
+                                    empty2 = mod_prod.Check_Product()
+                                    if empty2 == False:
+                                        print("No se pueden realizar ventas si no hay productos")
+                                    else:
+                                        employee = input("Ingrese el código del empleado a cargo de la venta: ")
+                                        look = mod_emp.Find_Emp(employee)
+                                        if look == -1:
+                                            print("No hay ningún empleado con ese código")
+                                        else:
+                                            client = input("Ingrese el Nit del cliente que hace la compra: ")
+                                            look = mod_clie.Find_Client(client)
+                                            if look == -1:
+                                                print("No hay ningún cliente que coincida")
+                                            else:
+                                                num = int(input(
+                                                    "Cantidad de productos que sea van a vender(tipo de producto no total): "))
+                                                if num <= 0:
+                                                    print("La cantidad ingresada no es valida")
+                                                else:
+                                                    code_sell = f"S{contSell}"
+                                                    time = datetime.now()
+                                                    total = 0
+                                                    for i in range(num):
+                                                        code_sell_de = f"SD{contSell_de}"
+                                                        product = input("Ingrese el código del producto que se vende: ")
+                                                        look = mod_prod.Find_Product(product)
+                                                        if look == -1:
+                                                            print("No hay ningún producto que coincida")
+                                                        else:
+                                                            price = mod_prod.Get_Price(product)
+                                                            stock = mod_prod.Check_Stock(product)
+                                                            quantity = int(
+                                                                input("Ingrese la cantidad que va a vender del producto: "))
+                                                            if quantity <= 0 or quantity > int(stock):
+                                                                print("La cantidad ingresada no es valida")
+                                                            else:
+                                                                sub_total = int(price) * int(quantity)
+                                                                total = int(total) + int(sub_total)
+                                                                sell_de = Sells_Details(code_sell_de, quantity, product, price,
+                                                                                        sub_total, code_sell)
+                                                                see_sell_de.Add_Seller_Details(sell_de)
+                                                                mod_prod.Selling(product, quantity)
+                                                                contSell_de += 1
+                                                    sell = Sells(code_sell, time, client, employee, total)
+                                                    see_sell.Add_Seller(sell)
+                        case "2":
+                            empty = see_sell.Check_Sell()
+                            if empty == False:
+                                print("No hay ninguna venta que mostrar")
+                            else:
+                                see_sell.Show_Seller()
+                        case "3":
+                            print("Gracias por utilizar el programa: ")
+                            mod_c.Save_Cat()
+                            code.Save_Codes(contC, contE, contProv, contPur, contProd, contPur_de, contCli, contSell,
+                                            contSell_de)
+                            mod_emp.Save_Emp()
+                            mod_prov.Save_Prov()
+                            mod_prod.Save_Prod()
+                            mod_clie.Save_Clients()
+                            see_p.Save_Pur()
+                            see_pd.Save_Pur_De()
+                            see_sell.Save_Sells()
+                            see_sell_de.Save_Sell_D()
+                            break
+                        case _:
+                            print("OPCION INVALIDA")
                 except ValueError:
                     print("El tipo de dato ingresado no es valido")
         case "bodeguero":
             while 0 != 1:
                 try:
                     menus.Buyer_Menu()
+                    opt = input("Ingrese la opción que desee: ")
+                    match opt:
+                        case "1":
+                            pass
+                        case "2":
+                            pass
+                        case "3":
+                            pass
+                        case "4":
+                            pass
+                        case "5":
+                            print("Gracias por utilizar el programa: ")
+                            mod_c.Save_Cat()
+                            code.Save_Codes(contC, contE, contProv, contPur, contProd, contPur_de, contCli, contSell,
+                                            contSell_de)
+                            mod_emp.Save_Emp()
+                            mod_prov.Save_Prov()
+                            mod_prod.Save_Prod()
+                            mod_clie.Save_Clients()
+                            see_p.Save_Pur()
+                            see_pd.Save_Pur_De()
+                            see_sell.Save_Sells()
+                            see_sell_de.Save_Sell_D()
+                            break
+                        case _:
+                            print("OPCION INVALIDA")
                 except ValueError:
                     print("Tipo de dato incorrecto")
         case "master":
