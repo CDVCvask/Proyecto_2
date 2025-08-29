@@ -243,7 +243,7 @@ class Mod_Product:
                     line = line.strip()
                     if line:
                         ID_pro,Name,Category,Price,Stock = line.split(":")
-                        self.products[ID_pro] = {'Nombre':Name,'Categoria':Category,'Precio':Price,'Stock':Stock}
+                        self.products[ID_pro] = {'Nombre':Name,'Categoría':Category,'Precio':Price,'Stock':Stock}
         except FileNotFoundError:
             print("El archivo Productos.txt  no existe")
     def Save_Prod(self):
