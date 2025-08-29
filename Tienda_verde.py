@@ -217,7 +217,7 @@ class Mod_Supplier:
             cat = mod_c.Cat_Name(value['Categoria'])
             print(f"Proveedor {count}")
             print(f"Código {code}, Nombre: {value['Nombre']}, Empresa: {value['Empresa']}")
-            print(f"Telefno: {value['Telefno']}, Dirección: {value['Dirección']}, Correo: {value['Correo']}")
+            print(f"Telefno: {value['Telefono']}, Dirección: {value['Dirección']}, Correo: {value['Correo']}")
             print(f"Categoria: {cat}")
             count = count + 1
             print(" ")
@@ -589,10 +589,10 @@ while 0 != 1:
                                             print("El salario ingresado no es valido")
                                         else:
                                             break
-                            emp = Employees(emp_code, name, phone, adress, mail,salary)
-                            count = count + 1
-                            contE = contE + 1
-                            mod_emp.Add_Emp(emp)
+                                emp = Employees(emp_code, name, phone, adress, mail,salary)
+                                count = count + 1
+                                contE = contE + 1
+                                mod_emp.Add_Emp(emp)
                     case "3":
                         count = 0
                         num = int(input("Cuantos prooverdores desea ingresar: "))
@@ -619,9 +619,9 @@ while 0 != 1:
                                             print("No se a encontrado ninguna categoría con ese código")
                                         else:
                                             break
-                            supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
-                            mod_prov.Add_Sup(supplier)
-                            contProv = contProv + 1
+                                supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
+                                mod_prov.Add_Sup(supplier)
+                                contProv = contProv + 1
                     case "4":
                         count = 1
                         num = int(input("Cuantos clientes desea ingresar: "))
@@ -642,6 +642,7 @@ while 0 != 1:
                                         break
                                 client = Clients(nit,name,phone,adress,mail)
                                 mod_clie.Add_Client(client)
+                                contCli = contCli + 1
                     case "5":
                         pass
                     case _:
