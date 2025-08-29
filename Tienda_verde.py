@@ -598,6 +598,8 @@ else:
     contSell = int(code.Get_CS())
     contSell_de = int(code.Get_CSD())
 while True:
+    print("Loging BingBong")
+    print(" ")
     user = input("Ingrese su usuario: ")
     password = input("Ingrese su contraseña: ")
     login = mod_emp.Login(user,password)
