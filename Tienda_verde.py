@@ -286,7 +286,7 @@ class Mod_Product:
     def Selling(self,code,quantity):
         for key,value in self.products.items():
             if code == key:
-                value['Stock'] = value['Stock'] - quantity
+                value['Stock'] = int(value['Stock']) - int(quantity)
     def Buying(self,code,quantity):
         for key,value in self.products.items():
             if code == key:
@@ -868,11 +868,11 @@ while 0 != 1:
                                                 price = mod_prod.Get_Price(product)
                                                 stock = mod_prod.Check_Stock(product)
                                                 quantity = int(input("Ingrese la cantidad que va a vender del producto: "))
-                                                if quantity <= 0 or quantity > stock:
+                                                if quantity <= 0 or quantity > int(stock):
                                                     print("La cantidad ingresada no es valida")
                                                 else:
                                                     sub_total = price * quantity
-                                                    total = total + sub_total
+                                                    total = int(total) + int(sub_total)
                                                     sell_de = Sells_Details(code_sell_de,quantity,product,price,sub_total,code_sell)
                                                     see_sell_de.Add_Seller_Details(sell_de)
                                                     mod_prod.Selling(product,quantity)

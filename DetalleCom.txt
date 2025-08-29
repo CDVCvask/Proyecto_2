@@ -1,0 +1,3 @@
+PurDe5:Com2:10:Prod5:10:100:N/A
+PurDe6:Com2:20:Prod6:20:400:20
+PurDe7:Com2:30:Prod7:30:900:N/A
