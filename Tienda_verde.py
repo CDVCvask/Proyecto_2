@@ -229,7 +229,7 @@ class Mod_Employee:
         pos = ""
         for key,value in self.employees.items():
             if code == key:
-                pos == value['Puesto']
+                pos = value['Puesto']
         return pos
 class Mod_Supplier:
     def __init__(self):
@@ -599,7 +599,7 @@ else:
     contSell_de = int(code.Get_CSD())
 while True:
     user = input("Ingrese su usuario: ")
-    password = input("Ingrese su contraseña")
+    password = input("Ingrese su contraseña: ")
     login = mod_emp.Login(user,password)
     if login == "":
         contLog = contLog + 1
@@ -607,16 +607,19 @@ while True:
     else:
         exit = -2
         break
-    if contlog == 2:
+    if contLog == 3:
         print("Demasiados intentos fallidos")
         exit = -1
+        break
 if exit == -1:
     print("Saliendo del programa")
 else:
     name = mod_emp.Get_Name(login)
     pos = mod_emp.Get_Position(login)
     print(f"Bienvenido {name}")
-    match pos.lower():
+    pos = pos.lower()
+    print(f"puesto: {pos}")
+    match pos:
         case "admin":
             while 0 != 1:
                 try:
