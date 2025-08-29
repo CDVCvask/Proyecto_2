@@ -404,14 +404,14 @@ class See_Sell:
                 for line in file:
                     line = line.strip()
                     if line:
-                        ID_Sell,Date,Client,Employee,Total = line.split(":")
+                        ID_Sell,Date,Client,Employee,Total = line.split("/")
                         self.sellers[ID_Sell] = {'Fecha':Date,'Cliente':Client,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
             print("El archivo Ventas.txt no existe")
     def Save_Sells(self):
         with open("Ventas.txt","w", encoding = "utf-8") as file:
             for code, value in self.sellers.items():
-                file.write(f"{code}:{value['Fecha']}:{value['Cliente']}:{value['Empleado']}:{value['Total']}\n")
+                file.write(f"{code}/{value['Fecha']}/{value['Cliente']}/{value['Empleado']}/{value['Total']}\n")
     def Add_Seller(self,seller):
         self.sellers[seller.ID_Sell] = {'Fecha':seller.Date,'Cliente':seller.Client,'Empleado':seller.Employee,'Total':seller.Total}
     def Show_Seller(self):
@@ -453,7 +453,7 @@ class See_Sell_De:
         count = 1
         for key,value in self.sellers_details.items():
             if code == value['Venta']:
-                sub = value['Precio'] * value['Cantidad']
+                sub = int(value['Precio']) * int(value['Cantidad'])
                 print(f"Producto: {count}")
                 print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']} = SubTotal: {sub}")
                 count = count + 1
@@ -871,7 +871,7 @@ while 0 != 1:
                                                 if quantity <= 0 or quantity > int(stock):
                                                     print("La cantidad ingresada no es valida")
                                                 else:
-                                                    sub_total = price * quantity
+                                                    sub_total = int(price) * int(quantity)
                                                     total = int(total) + int(sub_total)
                                                     sell_de = Sells_Details(code_sell_de,quantity,product,price,sub_total,code_sell)
                                                     see_sell_de.Add_Seller_Details(sell_de)
