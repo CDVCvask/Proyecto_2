@@ -83,7 +83,7 @@ class Category:
         self.Cat_Code = Cat_Code
         self.Name = Name
 class Products:
-    def __init__(self,ID_Pro,Name,Category,Price,Tpurchase,Tsells):
+    def __init__(self,ID_Pro,Name,Category,Price,Tpurchase,Tsells,Expiration):
         self.ID_Pro = ID_Pro
         self.Name = Name
         self.Category = Category
@@ -91,6 +91,7 @@ class Products:
         self.Tpurchase = Tpurchase
         self.Tsells = Tsells
         self.Stock = Tpurchase - Tsells
+        self.Expiration = Expiration
 class Suppliers:
     def __init__(self,ID_Sup,Name,Company,Phone,Adress,Mail,Category):
         self.ID_Sup = ID_Sup
@@ -291,24 +292,24 @@ class Mod_Product:
                 for line in file:
                     line = line.strip()
                     if line:
-                        ID_pro,Name,Category,Price,Stock = line.split(":")
-                        self.products[ID_pro] = {'Nombre':Name,'Categoría':Category,'Precio':Price,'Stock':Stock}
+                        ID_pro,Name,Category,Price,Stock,Expiration = line.split(":")
+                        self.products[ID_pro] = {'Nombre':Name,'Categoría':Category,'Precio':Price,'Stock':Stock,'Vencimiento':Expiration}
         except FileNotFoundError:
             print("El archivo Productos.txt  no existe")
     def Save_Prod(self):
         with open("Productos.txt","w", encoding = "utf-8") as file:
             for code, value in self.products.items():
-                file.write(f"{code}:{value['Nombre']}:{value['Categoría']}:{value['Precio']}:{value['Stock']}\n")
+                file.write(f"{code}:{value['Nombre']}:{value['Categoría']}:{value['Precio']}:{value['Stock']}:{value['Vencimiento']}\n")
     def Add_Product(self,product):
         self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
-                                        'Stock':product.Stock}
+                                        'Stock':product.Stock,'Vencimiento':product.Expiration}
     def Show_Product(self):
         count = 1
         for key,value in self.products.items():
             cat = mod_c.Cat_Name(value['Categoria'])
             print(f"Producto {count}")
             print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {cat},"
-                  f" Precio: {value['Precio']}, Stock: {value['Stock']}")
+                  f" Precio: {value['Precio']}, Stock: {value['Stock']}, Fecha de venciminto: {value['Vencimiento']}")
             count = count + 1
     def Check_Product(self):
         if len(self.products) == 0:
@@ -351,6 +352,12 @@ class Mod_Product:
         for key,value in self.products.items():
             if code == key:
                 value['Precio'] = new_price
+    def Check_Expiration(self):
+        time = datetime.datetime.now()
+        time = time.strftime("%d/%m/%Y")
+        for key,value in self.products.items():
+            if time <= value['Vencimiento']:
+
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
@@ -1059,7 +1066,7 @@ else:
                                                                                 expiration = "N/A"
                                                                                 product = Products(code_prod, name,
                                                                                                    category,
-                                                                                                   s_price, quantity, 0)
+                                                                                                   s_price, quantity, 0,expiration)
                                                                                 mod_prod.Add_Product(product)
                                                                                 contProd += 1
                                                                                 pur_de = Purchase_Details(code_pur_de,
@@ -1083,7 +1090,7 @@ else:
                                                                                     product = Products(code_prod, name,
                                                                                                        category,
                                                                                                        s_price,
-                                                                                                       quantity, 0)
+                                                                                                       quantity, 0,expiration)
                                                                                     mod_prod.Add_Product(product)
                                                                                     contProd += 1
                                                                                     pur_de = Purchase_Details(
@@ -1171,7 +1178,7 @@ else:
                                                                                                        name,
                                                                                                        category,
                                                                                                        s_price,
-                                                                                                       quantity, 0)
+                                                                                                       quantity, 0,expiration)
                                                                                     mod_prod.Add_Product(product)
                                                                                     contProd += 1
                                                                                     pur_de = Purchase_Details(
@@ -1200,7 +1207,7 @@ else:
                                                                                             code_prod, name,
                                                                                             category,
                                                                                             s_price,
-                                                                                            quantity, 0)
+                                                                                            quantity, 0,expiration)
                                                                                         mod_prod.Add_Product(
                                                                                             product)
                                                                                         contProd += 1
@@ -1549,7 +1556,7 @@ else:
                                                                             if expiration == "":
                                                                                 expiration = "N/A"
                                                                             product = Products(code_prod, name, category,
-                                                                                               s_price,quantity,0)
+                                                                                               s_price,quantity,0,expiration)
                                                                             mod_prod.Add_Product(product)
                                                                             contProd += 1
                                                                             pur_de = Purchase_Details(code_pur_de,code_pur,quantity,
@@ -1617,7 +1624,7 @@ else:
                                                                                     if expiration == "":
                                                                                         expiration = "N/A"
                                                                                     product = Products(code_prod, name, category,
-                                                                                                       s_price, quantity, 0)
+                                                                                                       s_price, quantity, 0,expiration)
                                                                                     mod_prod.Add_Product(product)
                                                                                     contProd += 1
                                                                                     pur_de = Purchase_Details(contPur_de, code_pur,
