@@ -379,7 +379,7 @@ class See_Purchase:
     def Save_Pur(self):
         with open("Compras.txt","w", encoding = "utf-8") as file:
             for code, value in self.purchases.items():
-                file.write(f"{code}/{value['Fecha']}/{value['Proveedor']}/{value['Empleado']}/{value['Total']}\n")
+                file.write(f"{code};{value['Fecha']};{value['Proveedor']};{value['Empleado']};{value['Total']}\n")
     def Add_Pur(self,pur):
         self.purchases[pur.ID_Pur] = {'Fecha':pur.Date,'Proveedor':pur.Supplier,'Empleado':pur.Employee,'Total':pur.Total}
     def Show_Pur(self):
@@ -489,14 +489,14 @@ class See_Sell:
                 for line in file:
                     line = line.strip()
                     if line:
-                        ID_Sell,Date,Client,Employee,Total = line.split("/")
+                        ID_Sell,Date,Client,Employee,Total = line.split(";")
                         self.sellers[ID_Sell] = {'Fecha':Date,'Cliente':Client,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
             print("El archivo Ventas.txt no existe")
     def Save_Sells(self):
         with open("Ventas.txt","w", encoding = "utf-8") as file:
             for code, value in self.sellers.items():
-                file.write(f"{code}/{value['Fecha']}/{value['Cliente']}/{value['Empleado']}/{value['Total']}\n")
+                file.write(f"{code};{value['Fecha']};{value['Cliente']};{value['Empleado']};{value['Total']}\n")
     def Add_Seller(self,seller):
         self.sellers[seller.ID_Sell] = {'Fecha':seller.Date,'Cliente':seller.Client,'Empleado':seller.Employee,'Total':seller.Total}
     def Show_Seller(self):
@@ -923,6 +923,8 @@ else:
                                                     else:
                                                         price = mod_prod.Get_Price(product)
                                                         stock = mod_prod.Check_Stock(product)
+                                                        print(f"Hay {stock} existencias del siguiente producto")
+                                                        print(" ")
                                                         quantity = int(
                                                             input("Ingrese la cantidad que va a vender del producto: "))
                                                         if quantity <= 0 or quantity > int(stock):
