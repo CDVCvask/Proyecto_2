@@ -333,7 +333,7 @@ class Mod_Product:
     def Buying(self,code,quantity):
         for key,value in self.products.items():
             if code == key:
-                value['Stock'] = value['Stock'] + quantity
+                value['Stock'] = int(value['Stock']) + quantity
     def Modify(self,new_price,code):
         for key,value in self.products.items():
             if code == key:
@@ -1113,18 +1113,20 @@ else:
                                                             if look == -1:
                                                                 print("No se encontró ningún producto con ese código")
                                                             else:
+                                                                code_prod = product
                                                                 quantity = int(input("Cuantas unidades va a comprar: "))
-                                                                price = mod_prod.Get_Price(product)
+                                                                price = int(mod_prod.Get_Price(product))
                                                                 expiration = input(
                                                                     "Ingrese la fecha de caducidad"" del producto(Si no tiene deje el espacio"
                                                                     "en blanco: ")
                                                                 if expiration == "":
                                                                     expiration = "N/A"
                                                                 subtotal = quantity * price
-                                                                total = total + subtotal
+                                                                total = int(total) + int(subtotal)
                                                                 pur_de = Purchase_Details(contPur_de, code_pur, quantity,
                                                                                           code_prod, price, subtotal,
                                                                                           expiration)
+                                                                mod_prod.Buying(code_prod,quantity)
                                                                 contPur_de += 1
                                                         contPur = contPur + 1
                                                         purchase = Purchase(code_pur, time, supplier, employee, total)
