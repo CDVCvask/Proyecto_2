@@ -720,13 +720,18 @@ else:
                                 print(" ")
                         case "2":
                             count = 0
+                            out = 0
                             while 0 != 1:
                                 Prov_code = f"Prov{contProv}"
                                 while 0 != 1:
                                     print(f"Ingreso de la prooverdore {count + 1}")
-                                    name = input("Ingrese el nombre del prooverdore: ")
+                                    print(" ")
+                                    name = input("Ingrese el nombre del prooverdore(Ingrese el código para salir): ")
                                     if name == "":
                                         print("No puede dejar este espacio en blanco")
+                                    elif name == "CALLIOPE":
+                                        out = 1
+                                        break
                                     else:
                                         Company = input(
                                             "Ingrese el nombre de su empresa(Si no tiene deje en blanco el espacio: ")
@@ -741,9 +746,15 @@ else:
                                             print("No se a encontrado ninguna categoría con ese código")
                                         else:
                                             break
+                                if out == 1:
+                                    print("Regresando al menu principal...")
+                                    print(" ")
+                                    break
                                 supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
                                 mod_prov.Add_Sup(supplier)
                                 contProv = contProv + 1
+                                print("El proveedor se a agregado con exito")
+                                print(" ")
                         case "3":
                             menus.Move_Menu()
                             opt1 = input("Seleccione cual movimiento desea ver: ")
@@ -860,6 +871,7 @@ else:
                     match opt:
                         case "1":
                             empty = mod_emp.Check_Emp()
+                            cont = 1
                             if empty == False:
                                 print("No se pueden realizar ventas si no hay empleados")
                             else:
@@ -881,37 +893,42 @@ else:
                                             if look == -1:
                                                 print("No hay ningún cliente que coincida")
                                             else:
-                                                num = int(input(
-                                                    "Cantidad de productos que sea van a vender(tipo de producto no total): "))
-                                                if num <= 0:
-                                                    print("La cantidad ingresada no es valida")
-                                                else:
-                                                    code_sell = f"S{contSell}"
-                                                    time = datetime.now()
-                                                    total = 0
-                                                    for i in range(num):
-                                                        code_sell_de = f"SD{contSell_de}"
-                                                        product = input("Ingrese el código del producto que se vende: ")
-                                                        look = mod_prod.Find_Product(product)
-                                                        if look == -1:
-                                                            print("No hay ningún producto que coincida")
+                                                code_sell = f"S{contSell}"
+                                                time = datetime.now()
+                                                total = 0
+                                                while 0 != 1:
+                                                    code_sell_de = f"SD{contSell_de}"
+                                                    print(f"Venta del procuto {cont}")
+                                                    print(" ")
+                                                    product = input("Ingrese el código del producto que se vende(Ingrese el código para salir): ")
+                                                    look = mod_prod.Find_Product(product)
+                                                    if product == "CALLIOPE":
+                                                        out = 1
+                                                        break
+                                                    if look == -1:
+                                                        print("No hay ningún producto que coincida")
+                                                    else:
+                                                        price = mod_prod.Get_Price(product)
+                                                        stock = mod_prod.Check_Stock(product)
+                                                        quantity = int(
+                                                            input("Ingrese la cantidad que va a vender del producto: "))
+                                                        if quantity <= 0 or quantity > int(stock):
+                                                            print("La cantidad ingresada no es valida")
                                                         else:
-                                                            price = mod_prod.Get_Price(product)
-                                                            stock = mod_prod.Check_Stock(product)
-                                                            quantity = int(
-                                                                input("Ingrese la cantidad que va a vender del producto: "))
-                                                            if quantity <= 0 or quantity > int(stock):
-                                                                print("La cantidad ingresada no es valida")
-                                                            else:
-                                                                sub_total = int(price) * int(quantity)
-                                                                total = int(total) + int(sub_total)
-                                                                sell_de = Sells_Details(code_sell_de, quantity, product, price,
-                                                                                        sub_total, code_sell)
-                                                                see_sell_de.Add_Seller_Details(sell_de)
-                                                                mod_prod.Selling(product, quantity)
-                                                                contSell_de += 1
-                                                    sell = Sells(code_sell, time, client, employee, total)
-                                                    see_sell.Add_Seller(sell)
+                                                            sub_total = int(price) * int(quantity)
+                                                            total = int(total) + int(sub_total)
+                                                            sell_de = Sells_Details(code_sell_de, quantity, product, price,
+                                                                                    sub_total, code_sell)
+                                                            see_sell_de.Add_Seller_Details(sell_de)
+                                                            mod_prod.Selling(product, quantity)
+                                                            contSell_de += 1
+                                                            cont = cont +1
+                                                            print("Producto vendido correctamente")
+                                                            print(" ")
+                                                sell = Sells(code_sell, time, client, employee, total)
+                                                see_sell.Add_Seller(sell)
+                                                print("Venta realizada exitosamente")
+                                                print(" ")
                         case "2":
                             empty = see_sell.Check_Sell()
                             if empty == False:
