@@ -655,92 +655,95 @@ else:
                     opt = input("Ingrese la opción que desee: ")
                     match opt:
                         case "1":
+                            out = 0
                             count = 0
-                            num = int(input("Cuantos empleados desea ingresar:"))
-                            if num <= 0:
-                                print("La cantidad ingresada no es valida")
-                            else:
-                                for i in range(num):
-                                    emp_code = f"E{contE}"
-                                    while 0 != 1:
-                                        print(f"Ingreso de la empleado {count + 1}")
-                                        name = input("Ingrese el nombre del empleado/a: ")
-                                        if name == "":
-                                            print("No puede dejar el espacio en blanco")
-                                        else:
-                                            phone = input("Ingrese su telefono: ")
-                                            adress = input("Ingrese su dirección: ")
-                                            mail = input("Ingrese su correo: ")
-                                            position = input("Ingrese el puesto del empleado(Admin/Vendedor/Bodeguero)")
-                                            if position.lower() == "vendedor":
-                                                salary = 3500
-                                                user = input("Ingrese el usuario del empleado: ")
-                                                if user == "":
-                                                    print("No se puede dejar el espacio en blanco")
-                                                else:
-                                                    password = input("Ingrese su contraseña: ")
-                                                    if password == "":
-                                                        print("No puede dejar el espacio en blanco")
-                                                    else:
-                                                        break
-                                            elif position.lower() == "admin":
-                                                salary = 10000
-                                                user = input("Ingrese el usuario del empleado: ")
-                                                if user == "":
-                                                    print("No se puede dejar el espacio en blanco")
-                                                else:
-                                                    password = input("Ingrese su contraseña: ")
-                                                    if password == "":
-                                                        print("No puede dejar el espacio en blanco")
-                                                    else:
-                                                        break
-                                            elif position.lower() == "bodeguero":
-                                                salary = 5000
-                                                user = input("Ingrese el usuario del empleado: ")
-                                                if user == "":
-                                                    print("No se puede dejar el espacio en blanco")
-                                                else:
-                                                    password = input("Ingrese su contraseña: ")
-                                                    if password == "":
-                                                        print("No puede dejar el espacio en blanco")
-                                                    else:
-                                                        break
+                            while 0 != 1:
+                                emp_code = f"E{contE}"
+                                while 0 != 1:
+                                    print(f"Ingreso de la empleado {count + 1}")
+                                    print(" ")
+                                    name = input("Ingrese el nombre del empleado/a(Ingrese el código para salir): ")
+                                    if name == "":
+                                        print("No puede dejar el espacio en blanco")
+                                    elif name == "CALLIOPE":
+                                        out = 1
+                                        break
+                                    else:
+                                        phone = input("Ingrese su telefono: ")
+                                        adress = input("Ingrese su dirección: ")
+                                        mail = input("Ingrese su correo: ")
+                                        position = input("Ingrese el puesto del empleado(Admin/Vendedor/Bodeguero)")
+                                        if position.lower() == "vendedor":
+                                            salary = 3500
+                                            user = input("Ingrese el usuario del empleado: ")
+                                            if user == "":
+                                                print("No se puede dejar el espacio en blanco")
                                             else:
-                                                print("No es un puesto valido")
-                                    emp = Employees(emp_code, name, phone, adress, mail, salary, user, password, position)
-                                    count = count + 1
-                                    contE = contE + 1
-                                    mod_emp.Add_Emp(emp)
+                                                password = input("Ingrese su contraseña: ")
+                                                if password == "":
+                                                    print("No puede dejar el espacio en blanco")
+                                                else:
+                                                    break
+                                        elif position.lower() == "admin":
+                                            salary = 10000
+                                            user = input("Ingrese el usuario del empleado: ")
+                                            if user == "":
+                                                print("No se puede dejar el espacio en blanco")
+                                            else:
+                                                password = input("Ingrese su contraseña: ")
+                                                if password == "":
+                                                    print("No puede dejar el espacio en blanco")
+                                                else:
+                                                    break
+                                        elif position.lower() == "bodeguero":
+                                            salary = 5000
+                                            user = input("Ingrese el usuario del empleado: ")
+                                            if user == "":
+                                                print("No se puede dejar el espacio en blanco")
+                                            else:
+                                                password = input("Ingrese su contraseña: ")
+                                                if password == "":
+                                                    print("No puede dejar el espacio en blanco")
+                                                else:
+                                                    break
+                                        else:
+                                            print("No es un puesto valido")
+                                if out == 1:
+                                    print("Regresando al menu principal...")
+                                    print(" ")
+                                    break
+                                emp = Employees(emp_code, name, phone, adress, mail, salary, user, password, position)
+                                count = count + 1
+                                contE = contE + 1
+                                mod_emp.Add_Emp(emp)
+                                print("El empleado se a agregado con exito")
+                                print(" ")
                         case "2":
                             count = 0
-                            num = int(input("Cuantos prooverdores desea ingresar: "))
-                            if num <= 0:
-                                print("La cantidad ingresada no es valida")
-                            else:
-                                for i in range(num):
-                                    Prov_code = f"Prov{contProv}"
-                                    while 0 != 1:
-                                        print(f"Ingreso de la prooverdore {count + 1}")
-                                        name = input("Ingrese el nombre del prooverdore: ")
-                                        if name == "":
-                                            print("No puede dejar este espacio en blanco")
+                            while 0 != 1:
+                                Prov_code = f"Prov{contProv}"
+                                while 0 != 1:
+                                    print(f"Ingreso de la prooverdore {count + 1}")
+                                    name = input("Ingrese el nombre del prooverdore: ")
+                                    if name == "":
+                                        print("No puede dejar este espacio en blanco")
+                                    else:
+                                        Company = input(
+                                            "Ingrese el nombre de su empresa(Si no tiene deje en blanco el espacio: ")
+                                        if Company == "":
+                                            Company = "N/A"
+                                        phone = input("Ingrese el telefono del prooverdor: ")
+                                        adress = input("Ingrese la dirección del proveedor: ")
+                                        mail = input("Ingrese el correo del proveedor:")
+                                        category = input("Ingrese el código de la categoría que provee: ")
+                                        find = mod_c.Find_Cat(category)
+                                        if find == -1:
+                                            print("No se a encontrado ninguna categoría con ese código")
                                         else:
-                                            Company = input(
-                                                "Ingrese el nombre de su empresa(Si no tiene deje en blanco el espacio: ")
-                                            if Company == "":
-                                                Company = "N/A"
-                                            phone = input("Ingrese el telefono del prooverdor: ")
-                                            adress = input("Ingrese la dirección del proveedor: ")
-                                            mail = input("Ingrese el correo del proveedor:")
-                                            category = input("Ingrese el código de la categoría que provee: ")
-                                            find = mod_c.Find_Cat(category)
-                                            if find == -1:
-                                                print("No se a encontrado ninguna categoría con ese código")
-                                            else:
-                                                break
-                                    supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
-                                    mod_prov.Add_Sup(supplier)
-                                    contProv = contProv + 1
+                                            break
+                                supplier = Suppliers(Prov_code, name, Company, phone, adress, mail, find)
+                                mod_prov.Add_Sup(supplier)
+                                contProv = contProv + 1
                         case "3":
                             menus.Move_Menu()
                             opt1 = input("Seleccione cual movimiento desea ver: ")
