@@ -355,9 +355,20 @@ class Mod_Product:
     def Check_Expiration(self):
         time = datetime.datetime.now()
         time = time.strftime("%d/%m/%Y")
+        expire = 0
+        count = 1
         for key,value in self.products.items():
             if time <= value['Vencimiento']:
-
+                expire = 1
+        if expire == 1:
+            print("Los siguientes productos están por vencerse: ")
+            for key,value in self.products.items():
+                if time <= value['Vencimiento']:
+                    cat = mod_c.Cat_Name(value['Categoria'])
+                    print(f"Producto {count}")
+                    print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {cat},"
+                          f" Precio: {value['Precio']}, Stock: {value['Stock']}, Fecha de venciminto: {value['Vencimiento']}")
+                    count = count + 1
 class See_Purchase:
     def __init__(self):
         self.purchases = {}
