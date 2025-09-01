@@ -669,6 +669,7 @@ else:
         case "admin":
             while 0 != 1:
                 try:
+                    mod_prod.Check_Expiration()
                     menus.Admin_Menu()
                     opt = input("Ingrese la opción que desee: ")
                     match opt:
@@ -884,6 +885,7 @@ else:
         case "vendedor":
             while 0 != 1:
                 try:
+                    mod_prod.Check_Expiration()
                     menus.Salesman_Menu()
                     opt = input("Ingrese la opción que desee: ")
                     match opt:
@@ -979,6 +981,7 @@ else:
         case "bodeguero":
             while 0 != 1:
                 try:
+                    mod_prod.Check_Expiration()
                     menus.Buyer_Menu()
                     opt = input("Ingrese la opción que desee: ")
                     match opt:
@@ -1368,6 +1371,7 @@ else:
         case "master":
             while 0 != 1:
                 try:
+                    mod_prod.Check_Expiration()
                     menus.Main_Menu()
                     opt = input("Ingrese la opcion que desee: ")
                     match opt:
