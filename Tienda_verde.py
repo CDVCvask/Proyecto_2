@@ -1228,8 +1228,6 @@ else:
                                                             print(
                                                                 "Regresando al menu principal...")
                                                             print(" ")
-
-
                                             case "2":
                                                 total = 0
                                                 moves = 0
@@ -1262,16 +1260,44 @@ else:
                                                                     "en blanco: ")
                                                                 if expiration == "":
                                                                     expiration = "N/A"
-                                                                subtotal = quantity * price
-                                                                total = int(total) + int(subtotal)
-                                                                pur_de = Purchase_Details(contPur_de, code_pur, quantity,
-                                                                                          code_prod, price, subtotal,
-                                                                                          expiration)
-                                                                mod_prod.Buying(code_prod,quantity)
-                                                                contPur_de += 1
-                                                        contPur = contPur + 1
-                                                        purchase = Purchase(code_pur, time, supplier, employee, total)
-                                                        see_p.Add_Pur(purchase)
+                                                                    subtotal = quantity * price
+                                                                    total = int(total) + int(subtotal)
+                                                                    pur_de = Purchase_Details(contPur_de, code_pur, quantity,
+                                                                                              code_prod, price, subtotal,
+                                                                                              expiration)
+                                                                    mod_prod.Buying(code_prod,quantity)
+                                                                    contPur_de += 1
+                                                                    moves = 1
+                                                                    print("Restock realizado con exito")
+                                                                    print(" ")
+                                                                else:
+                                                                    expir = datetime.strptime(
+                                                                        expiration, "%d/%m/%Y")
+                                                                    if expir >= time:
+                                                                        print(
+                                                                            "El producto ya está vencido")
+                                                                        print(" ")
+                                                                    else:
+                                                                        subtotal = quantity * price
+                                                                        total = int(total) + int(subtotal)
+                                                                        pur_de = Purchase_Details(contPur_de, code_pur,
+                                                                                                  quantity,
+                                                                                                  code_prod, price,
+                                                                                                  subtotal,
+                                                                                                  expiration)
+                                                                        mod_prod.Buying(code_prod, quantity)
+                                                                        contPur_de += 1
+                                                                        moves = 1
+                                                                        print("Restock realizado con exito")
+                                                                        print(" ")
+                                                        if moves == 1:
+                                                            contPur = contPur + 1
+                                                            purchase = Purchase(code_pur, time, supplier, employee, total)
+                                                            see_p.Add_Pur(purchase)
+                                                            print("Compra realizada con exito")
+                                                        else:
+                                                            print("Regresando al menu principal")
+                                                            print(" ")
                                             case "3":
                                                 print("Regresando al menu principal")
                                                 print(" ")
