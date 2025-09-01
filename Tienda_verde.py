@@ -505,7 +505,7 @@ class See_Sell:
             cli = mod_clie.Get_Name(value['Cliente'])
             emp = mod_emp.Get_Name(value['Empleado'])
             print(f"Venta: {count}")
-            print(f"Cliente: {value['Cliente']}, Empleado: {emp}, Fecha: {value['Fecha']}")
+            print(f"Cliente: {cli}, Empleado: {emp}, Fecha: {value['Fecha']}")
             see_sell_de.Show_Sell_De(key)
             print(f"Total = {value['Total']}")
             count = count + 1
