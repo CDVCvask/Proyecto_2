@@ -275,6 +275,12 @@ class Mod_Supplier:
             if sup == code:
                 supplier = code
         return supplier
+    def Get_Name(self,code):
+        name = ""
+        for key,value in self.suppliers.items():
+            if key == code:
+                name = value['Nombre']
+        return name
 class Mod_Product:
     def __init__(self):
         self.products = {}
@@ -299,8 +305,9 @@ class Mod_Product:
     def Show_Product(self):
         count = 1
         for key,value in self.products.items():
+            cat = mod_c.Cat_Name(value['Categoria'])
             print(f"Producto {count}")
-            print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {value['Categoría']},"
+            print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {cat},"
                   f" Precio: {value['Precio']}, Stock: {value['Stock']}")
             count = count + 1
     def Check_Product(self):
@@ -326,6 +333,12 @@ class Mod_Product:
             if code == key:
                 stock = value['Stock']
         return stock
+    def Get_Name(self,code):
+        name = ""
+        for key,value in self.products.items():
+            if code == key:
+                name = value['Nombre']
+        return name
     def Selling(self,code,quantity):
         for key,value in self.products.items():
             if code == key:
@@ -361,8 +374,10 @@ class See_Purchase:
     def Show_Pur(self):
         count = 1
         for key,value in self.purchases.items():
+            prov = mod_prov.Get_Name(value['Proveedor'])
+            emp = mod_emp.Get_Name(value['Empleado'])
             print(f"Compra {count}")
-            print(f"Proveedor: {value['Proveedor']}, Empleado a cargo: {value['Empleado']}, Fecha: {value['Fecha']}")
+            print(f"Proveedor: {prov}, Empleado a cargo: {emp}, Fecha: {value['Fecha'].strftime('%d/%m/%Y')}")
             see_pd.Show_Pur_De(key)
             print(f"Total = {value['Total']}")
             count = count + 1
@@ -401,9 +416,10 @@ class See_Purchase_Details:
     def Show_Pur_De(self,code):
         count = 1
         for key,value in self.purchase_Details.items():
+            prod = mod_prod.Get_Name(value['Producto'])
             if code == value['Codigo compra']:
                 print(f"Producto: {count}")
-                print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']}"
+                print(f"Producto: {prod}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']}"
                       f" = SubTotal: {value['SubTotal']}")
                 print(" ")
                 count = count + 1
@@ -446,6 +462,12 @@ class Mod_Clients:
             if find == key:
                 client = key
         return client
+    def Get_Name(self,code):
+        name = ""
+        for key, value in self.clients.items():
+            if key == code:
+                name = value['Nombre']
+        return name
 class See_Sell:
     def __init__(self):
         self.sellers = {}
@@ -469,6 +491,7 @@ class See_Sell:
     def Show_Seller(self):
         count = 1
         for key,value in self.sellers.items():
+            cli = mod_clie.
             print(f"Venta: {count}")
             print(f"Cliente: {value['Cliente']}, Empleado: {value['Empleado']}, Fecha: {value['Fecha']}")
             see_sell_de.Show_Sell_De(key)
