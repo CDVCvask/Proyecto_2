@@ -358,16 +358,22 @@ class Mod_Product:
         expire = 0
         count = 1
         for key,value in self.products.items():
-            if time <= value['Vencimiento']:
-                expire = 1
+            if time == "N/A":
+                pass
+            else:
+                if time <= value['Vencimiento']:
+                    expire = 1
         if expire == 1:
             print("Los siguientes productos están por vencerse: ")
             for key,value in self.products.items():
-                if time <= value['Vencimiento']:
-                    cat = mod_c.Cat_Name(value['Categoria'])
-                    print(f"Producto {count}")
-                    print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {cat},"
-                          f" Precio: {value['Precio']}, Stock: {value['Stock']}, Fecha de venciminto: {value['Vencimiento']}")
+                if time == "N/A":
+                    pass
+                else:
+                    if time <= value['Vencimiento']:
+                        cat = mod_c.Cat_Name(value['Categoria'])
+                        print(f"Producto {count}")
+                        print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {cat},"
+                              f" Precio: {value['Precio']}, Stock: {value['Stock']}, Fecha de venciminto: {value['Vencimiento']}")
                     count = count + 1
 class See_Purchase:
     def __init__(self):
@@ -1074,7 +1080,7 @@ else:
                                                                             sub_total = p_price * quantity
                                                                             total = total + sub_total
                                                                             expiration = input("Ingrese la fecha de caducidad"
-                                                                                               " del producto(Si no tiene deje el espacio"
+                                                                                               " del producto en formato DD/MM/AAAA(Si no tiene deje el espacio"
                                                                                                "en blanco: ")
                                                                             if expiration == "":
                                                                                 expiration = "N/A"
@@ -1184,7 +1190,7 @@ else:
                                                                                 total = total + sub_total
                                                                                 expiration = input(
                                                                                     "Ingrese la fecha de caducidad"
-                                                                                    " del producto(Si no tiene deje el espacio"
+                                                                                    " del producto en formato DD/MM/AAAA(Si no tiene deje el espacio"
                                                                                     "en blanco: ")
                                                                                 if expiration == "":
                                                                                     expiration = "N/A"
@@ -1566,7 +1572,7 @@ else:
                                                                             sub_total = p_price * quantity
                                                                             total = total + sub_total
                                                                             expiration = input("Ingrese la fecha de caducidad"
-                                                                                               " del producto(Si no tiene deje el espacio"
+                                                                                               " del producto en formato DD/MM/AAAA(Si no tiene deje el espacio"
                                                                                                "en blanco: ")
                                                                             if expiration == "":
                                                                                 expiration = "N/A"
@@ -1634,7 +1640,7 @@ else:
                                                                                     sub_total = p_price * quantity
                                                                                     total = total + sub_total
                                                                                     expiration = input("Ingrese la fecha de caducidad"
-                                                                                                       " del producto(Si no tiene deje el espacio"
+                                                                                                       " del producto en formato DD/MM/AAAA(Si no tiene deje el espacio"
                                                                                                        "en blanco: ")
                                                                                     if expiration == "":
                                                                                         expiration = "N/A"
@@ -1676,7 +1682,7 @@ else:
                                                             else:
                                                                 quantity = int(input("Cuantas unidades va a comprar: "))
                                                                 price = mod_prod.Get_Price(product)
-                                                                expiration = input("Ingrese la fecha de caducidad"" del producto(Si no tiene deje el espacio"
+                                                                expiration = input("Ingrese la fecha de caducidad"" del producto en formato DD/MM/AAAA(Si no tiene deje el espacio"
                                                                                    "en blanco: ")
                                                                 if expiration == "":
                                                                     expiration = "N/A"
