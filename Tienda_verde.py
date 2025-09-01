@@ -372,7 +372,7 @@ class See_Purchase:
                 for line in file:
                     line = line.strip()
                     if line:
-                        ID_pur,Date,Supplier,Employee,Total = line.split("/")
+                        ID_pur,Date,Supplier,Employee,Total = line.split(";")
                         self.purchases[ID_pur] = {'Fecha':Date,'Proveedor':Supplier,'Empleado':Employee,'Total':Total}
         except FileNotFoundError:
             print("El archivo Compras.txt no existe")
@@ -1084,11 +1084,12 @@ else:
                                                                             print(" ")
                                                                             moves = 1
                                                                         else:
-                                                                            expir = datetime.strptime(expiration, "%d/%m/%Y")
-                                                                            if expir >= time:
-                                                                                print("El producto ya está vencido")
-                                                                                print(" ")
-                                                                            else:
+                                                                            #expir = datetime.strptime(expiration, "%d/%m/%Y")
+                                                                            #today = datetime.strftime(time, "%d/%m/%Y")
+                                                                            #if expir >= time:
+                                                                                #print("El producto ya está vencido")
+                                                                                #print(" ")
+                                                                            #else:
                                                                                 product = Products(code_prod, name,
                                                                                                    category,
                                                                                                    s_price,
@@ -1198,13 +1199,13 @@ else:
                                                                                     print(" ")
                                                                                     moves = 1
                                                                                 else:
-                                                                                    expir = datetime.strptime(
-                                                                                        expiration, "%d/%m/%Y")
-                                                                                    if expir >= time:
-                                                                                        print(
-                                                                                            "El producto ya está vencido")
-                                                                                        print(" ")
-                                                                                    else:
+                                                                                    #expir = datetime.strptime(
+                                                                                        #expiration, "%d/%m/%Y")
+                                                                                    #if expir >= time:
+                                                                                        #print(
+                                                                                           # "El producto ya está vencido")
+                                                                                        #print(" ")
+                                                                                    #else:
                                                                                         product = Products(
                                                                                             code_prod, name,
                                                                                             category,
@@ -1280,13 +1281,13 @@ else:
                                                                     print("Restock realizado con exito")
                                                                     print(" ")
                                                                 else:
-                                                                    expir = datetime.strptime(
-                                                                        expiration, "%d/%m/%Y")
-                                                                    if expir >= time:
-                                                                        print(
-                                                                            "El producto ya está vencido")
-                                                                        print(" ")
-                                                                    else:
+                                                                    #expir = datetime.strptime(
+                                                                        #expiration, "%d/%m/%Y")
+                                                                    #if expir >= time:
+                                                                        #print(
+                                                                        #    "El producto ya está vencido")
+                                                                        #print(" ")
+                                                                    #else:
                                                                         subtotal = quantity * price
                                                                         total = int(total) + int(subtotal)
                                                                         pur_de = Purchase_Details(contPur_de, code_pur,
