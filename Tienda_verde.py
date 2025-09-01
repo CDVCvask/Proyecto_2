@@ -387,9 +387,8 @@ class See_Purchase:
         for key,value in self.purchases.items():
             prov = mod_prov.Get_Name(value['Proveedor'])
             emp = mod_emp.Get_Name(value['Empleado'])
-            date = datetime.strptime(value['Fecha'], "%d/%m/%Y")
             print(f"Compra {count}")
-            print(f"Proveedor: {prov}, Empleado a cargo: {emp}, Fecha: {date}")
+            print(f"Proveedor: {prov}, Empleado a cargo: {emp}, Fecha: {value['Fecha'] }")
             see_pd.Show_Pur_De(key)
             print(f"Total = {value['Total']}")
             count = count + 1
