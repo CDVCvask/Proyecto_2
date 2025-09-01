@@ -491,9 +491,10 @@ class See_Sell:
     def Show_Seller(self):
         count = 1
         for key,value in self.sellers.items():
-            cli = mod_clie.
+            cli = mod_clie.Get_Name(value['Cliente'])
+            emp = mod_emp.Get_Name(value['Empleado'])
             print(f"Venta: {count}")
-            print(f"Cliente: {value['Cliente']}, Empleado: {value['Empleado']}, Fecha: {value['Fecha']}")
+            print(f"Cliente: {value['Cliente']}, Empleado: {emp}, Fecha: {value['Fecha'].strftime('%d/%m/%Y')}")
             see_sell_de.Show_Sell_De(key)
             print(f"Total = {value['Total']}")
             count = count + 1
@@ -532,10 +533,11 @@ class See_Sell_De:
     def Show_Sell_De(self,code):
         count = 1
         for key,value in self.sellers_details.items():
+            prod = mod_prod.Get_Name(value['Producto'])
             if code == value['Venta']:
                 sub = int(value['Precio']) * int(value['Cantidad'])
                 print(f"Producto: {count}")
-                print(f"Producto: {value['Producto']}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']} = SubTotal: {sub}")
+                print(f"Producto: {prod}, Precio: {value['Precio']} X Cantidad: {value['Cantidad']} = SubTotal: {sub}")
                 count = count + 1
 class Codes:
     def __init__(self):
