@@ -941,14 +941,14 @@ else:
                                                             print("Producto vendido correctamente")
                                                             moves = 1
                                                             print(" ")
-                                                if moves == 1:
+                                                #if moves == 1:
                                                     sell = Sells(code_sell, time, client, employee, total)
                                                     see_sell.Add_Seller(sell)
                                                     print("Venta realizada exitosamente")
                                                     print(" ")
-                                                else:
-                                                    print("Regresando al menu principal")
-                                                    print(" ")
+                                                #else:
+                                                    #print("Regresando al menu principal")
+                                                    #print(" ")
                         case "2":
                             empty = see_sell.Check_Sell()
                             if empty == False:
