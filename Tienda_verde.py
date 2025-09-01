@@ -944,6 +944,7 @@ else:
                                                 #if moves == 1:
                                                     sell = Sells(code_sell, time, client, employee, total)
                                                     see_sell.Add_Seller(sell)
+                                                    contSell = contSell + 1
                                                     print("Venta realizada exitosamente")
                                                     print(" ")
                                                 #else:
