@@ -293,22 +293,22 @@ class Mod_Product:
                     line = line.strip()
                     if line:
                         ID_pro,Name,Category,Price,Stock,Expiration = line.split(":")
-                        self.products[ID_pro] = {'Nombre':Name,'Categoría':Category,'Precio':Price,'Stock':Stock,'Vencimiento':Expiration}
+                        self.products[ID_pro] = {'Nombre':Name,'Categoria':Category,'Precio':Price,'Stock':Stock,'Vencimiento':Expiration}
         except FileNotFoundError:
             print("El archivo Productos.txt  no existe")
     def Save_Prod(self):
         with open("Productos.txt","w", encoding = "utf-8") as file:
             for code, value in self.products.items():
-                file.write(f"{code}:{value['Nombre']}:{value['Categoría']}:{value['Precio']}:{value['Stock']}:{value['Vencimiento']}\n")
+                file.write(f"{code}:{value['Nombre']}:{value['Categoria']}:{value['Precio']}:{value['Stock']}:{value['Vencimiento']}\n")
     def Add_Product(self,product):
-        self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoría':product.Category,'Precio':product.Price,
+        self.products[product.ID_Pro] = {'Nombre': product.Name,'Categoria':product.Category,'Precio':product.Price,
                                         'Stock':product.Stock,'Vencimiento':product.Expiration}
     def Show_Product(self):
         count = 1
         for key,value in self.products.items():
             cat = mod_c.Cat_Name(value['Categoria'])
             print(f"Producto {count}")
-            print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoría: {cat},"
+            print(f"Codigo de producto: {key}, Nombre: {value['Nombre']},Categoria: {cat},"
                   f" Precio: {value['Precio']}, Stock: {value['Stock']}, Fecha de venciminto: {value['Vencimiento']}")
             count = count + 1
     def Check_Product(self):
@@ -353,7 +353,7 @@ class Mod_Product:
             if code == key:
                 value['Precio'] = new_price
     def Check_Expiration(self):
-        time = datetime.datetime.now()
+        time = datetime.now()
         time = time.strftime("%d/%m/%Y")
         expire = 0
         count = 1
@@ -400,8 +400,9 @@ class See_Purchase:
         for key,value in self.purchases.items():
             prov = mod_prov.Get_Name(value['Proveedor'])
             emp = mod_emp.Get_Name(value['Empleado'])
+            date = datetime.strptime(value['Fecha'], "%d/%m/%Y")
             print(f"Compra {count}")
-            print(f"Proveedor: {prov}, Empleado a cargo: {emp}, Fecha: {value['Fecha'].strftime('%d/%m/%Y')}")
+            print(f"Proveedor: {prov}, Empleado a cargo: {emp}, Fecha: {date}")
             see_pd.Show_Pur_De(key)
             print(f"Total = {value['Total']}")
             count = count + 1
@@ -517,8 +518,9 @@ class See_Sell:
         for key,value in self.sellers.items():
             cli = mod_clie.Get_Name(value['Cliente'])
             emp = mod_emp.Get_Name(value['Empleado'])
+            date = datetime.strptime(value['Fecha'], "%d/%m/%Y")
             print(f"Venta: {count}")
-            print(f"Cliente: {value['Cliente']}, Empleado: {emp}, Fecha: {value['Fecha'].strftime('%d/%m/%Y')}")
+            print(f"Cliente: {value['Cliente']}, Empleado: {emp}, Fecha: {date}")
             see_sell_de.Show_Sell_De(key)
             print(f"Total = {value['Total']}")
             count = count + 1
@@ -531,7 +533,7 @@ class See_Sell:
     def Get_TotalS(self):
         total = 0
         for key,value in self.sellers.items():
-            total = total + value['Total']
+            total = int(total) + int(value['Total'])
         return total
 class See_Sell_De:
     def __init__(self):
