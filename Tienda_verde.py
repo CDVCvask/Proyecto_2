@@ -1268,7 +1268,6 @@ else:
                                                             if look == -1:
                                                                 print("No se encontró ningún producto con ese código")
                                                             else:
-                                                                code_prod = product
                                                                 quantity = int(input("Cuantas unidades va a comprar: "))
                                                                 price = int(mod_prod.Get_Price(product))
                                                                 expiration = input(
@@ -1279,9 +1278,10 @@ else:
                                                                     subtotal = quantity * price
                                                                     total = int(total) + int(subtotal)
                                                                     pur_de = Purchase_Details(contPur_de, code_pur, quantity,
-                                                                                              code_prod, price, subtotal,
+                                                                                              product, price, subtotal,
                                                                                               expiration)
-                                                                    mod_prod.Buying(code_prod,quantity)
+                                                                    see_pd.Add_Pur_De(pur_de)
+                                                                    mod_prod.Buying(product,quantity)
                                                                     contPur_de += 1
                                                                     moves = 1
                                                                     print("Restock realizado con exito")
