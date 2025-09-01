@@ -960,23 +960,30 @@ else:
                     opt = input("Ingrese la opción que desee: ")
                     match opt:
                         case "1":
-                            num = int(input("Cuantas categorías desea ingresar: "))
-                            if num <= 0:
-                                print("La cantidad ingresada no es valida")
-                            else:
-                                for i in range(num):
-                                    cat_code = f"C{contC}"
-                                    while 0 != 1:
-                                        print(f"Ingreso de la categoría {count}")
-                                        name = input("Ingrese el nombre de la categoria: ")
-                                        if name == "":
-                                            print("No puede dejar este espacio en blanco")
-                                        else:
-                                            break
-                                    cat = Category(cat_code, name)
-                                    count = count + 1
-                                    contC = contC + 1
-                                    mod_c.Add_Cat(cat)
+                            out = 0
+                            while 0 != 1:
+                                cat_code = f"C{contC}"
+                                while 0 != 1:
+                                    print(f"Ingreso de la categoría {count}")
+                                    print(" ")
+                                    name = input("Ingrese el nombre de la categoria(Ingrese el codigo para salir): ")
+                                    if name == "":
+                                        print("No puede dejar este espacio en blanco")
+                                    elif name == "CALLIOPE":
+                                        out = 1
+                                        break
+                                    else:
+                                        break
+                                if out == 1:
+                                    print("Regresando el menu principal...")
+                                    print(" ")
+                                    break
+                                cat = Category(cat_code, name)
+                                count = count + 1
+                                contC = contC + 1
+                                mod_c.Add_Cat(cat)
+                                print("La categoría se a agregado exitosamente")
+                                print(" ")
                         case "2":
                             empty = mod_emp.Check_Emp()
                             empty1 = mod_prov.Check_Sup()
